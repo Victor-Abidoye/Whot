@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CARDS</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../eReceipt/jquery-ui-1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="../eReceipt/jquery-ui-1.12.1/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="../eReceipt/jquery-ui-1.12.1/jquery-ui.theme.min.css">
+    </head>
+    <body>
+        <div id="computer" class="clearfix">
+
+        </div>
+
+
+        <div id="center" class="clearfix">
+            <div id="market" ><p></p>  <span>whot</span></div>
+
+        </div>
+
+        <div id="player">
+
+        </div>
+        <script src="../eReceipt/jquery-3.5.1.min.js"></script>
+        <script src="../eReceipt/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+        <script>
+            $(function () {
+                var availableCard = [
+                        {
+                            number: 1,
+                            shape: "circle"
+                        },
+                        {
+                            number: 1,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 1,
+                            shape: "cross"
+                        },
+                        {
+                            number: 1,
+                            shape: "square"
+                        },
+                        {
+                            number: 1,
+                            shape: "star"
+                        },
+                        {
+                            number: 2,
+                            shape: "circle"
+                        },
+                        {
+                            number: 2,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 2,
+                            shape: "cross"
+                        },
+                        {
+                            number: 2,
+                            shape: "square"
+                        },
+                        {
+                            number: 2,
+                            shape: "star"
+                        },
+                        {
+                            number: 3,
+                            shape: "circle"
+                        },
+                        {
+                            number: 3,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 3,
+                            shape: "cross"
+                        },
+                        {
+                            number: 3,
+                            shape: "square"
+                        },
+                        {
+                            number: 3,
+                            shape: "star"
+                        },
+                        {
+                            number: 4,
+                            shape: "circle"
+                        },
+                        {
+                            number: 4,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 4,
+                            shape: "star"
+                        },
+                        {
+                            number: 5,
+                            shape: "circle"
+                        },
+                        {
+                            number: 5,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 5,
+                            shape: "cross"
+                        },
+                        {
+                            number: 5,
+                            shape: "square"
+                        },
+                        {
+                            number: 5,
+                            shape: "star"
+                        },
+                        {
+                            number: 7,
+                            shape: "circle"
+                        },
+                        {
+                            number: 7,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 7,
+                            shape: "cross"
+                        },
+                        {
+                            number: 7,
+                            shape: "square"
+                        },
+                        {
+                            number: 7,
+                            shape: "star"
+                        },
+                        {
+                            number: 8,
+                            shape: "circle"
+                        },
+                        {
+                            number: 8,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 8,
+                            shape: "star"
+                        },
+                        {
+                            number: 10,
+                            shape: "circle"
+                        },
+                        {
+                            number: 10,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 10,
+                            shape: "cross"
+                        },
+                        {
+                            number: 10,
+                            shape: "square"
+                        },
+                        {
+                            number: 11,
+                            shape: "circle"
+                        },
+                        {
+                            number: 11,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 11,
+                            shape: "cross"
+                        },
+                        {
+                            number: 11,
+                            shape: "square"
+                        },
+                        {
+                            number: 12,
+                            shape: "circle"
+                        },
+                        {
+                            number: 12,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 13,
+                            shape: "circle"
+                        },
+                        {
+                            number: 13,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 13,
+                            shape: "cross"
+                        },
+                        {
+                            number: 13,
+                            shape: "square"
+                        },
+                        {
+                            number: 14,
+                            shape: "circle"
+                        },
+                        {
+                            number: 14,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 14,
+                            shape: "cross"
+                        },
+                        {
+                            number: 14,
+                            shape: "square"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        }
+                    ]
+                var cardDeck = [
+                        {
+                            number: 1,
+                            shape: "circle"
+                        },
+                        {
+                            number: 1,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 1,
+                            shape: "cross"
+                        },
+                        {
+                            number: 1,
+                            shape: "square"
+                        },
+                        {
+                            number: 1,
+                            shape: "star"
+                        },
+                        {
+                            number: 2,
+                            shape: "circle"
+                        },
+                        {
+                            number: 2,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 2,
+                            shape: "cross"
+                        },
+                        {
+                            number: 2,
+                            shape: "square"
+                        },
+                        {
+                            number: 2,
+                            shape: "star"
+                        },
+                        {
+                            number: 3,
+                            shape: "circle"
+                        },
+                        {
+                            number: 3,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 3,
+                            shape: "cross"
+                        },
+                        {
+                            number: 3,
+                            shape: "square"
+                        },
+                        {
+                            number: 3,
+                            shape: "star"
+                        },
+                        {
+                            number: 4,
+                            shape: "circle"
+                        },
+                        {
+                            number: 4,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 4,
+                            shape: "star"
+                        },
+                        {
+                            number: 5,
+                            shape: "circle"
+                        },
+                        {
+                            number: 5,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 5,
+                            shape: "cross"
+                        },
+                        {
+                            number: 5,
+                            shape: "square"
+                        },
+                        {
+                            number: 5,
+                            shape: "star"
+                        },
+                        {
+                            number: 7,
+                            shape: "circle"
+                        },
+                        {
+                            number: 7,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 7,
+                            shape: "cross"
+                        },
+                        {
+                            number: 7,
+                            shape: "square"
+                        },
+                        {
+                            number: 7,
+                            shape: "star"
+                        },
+                        {
+                            number: 8,
+                            shape: "circle"
+                        },
+                        {
+                            number: 8,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 8,
+                            shape: "star"
+                        },
+                        {
+                            number: 10,
+                            shape: "circle"
+                        },
+                        {
+                            number: 10,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 10,
+                            shape: "cross"
+                        },
+                        {
+                            number: 10,
+                            shape: "square"
+                        },
+                        {
+                            number: 11,
+                            shape: "circle"
+                        },
+                        {
+                            number: 11,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 11,
+                            shape: "cross"
+                        },
+                        {
+                            number: 11,
+                            shape: "square"
+                        },
+                        {
+                            number: 12,
+                            shape: "circle"
+                        },
+                        {
+                            number: 12,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 13,
+                            shape: "circle"
+                        },
+                        {
+                            number: 13,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 13,
+                            shape: "cross"
+                        },
+                        {
+                            number: 13,
+                            shape: "square"
+                        },
+                        {
+                            number: 14,
+                            shape: "circle"
+                        },
+                        {
+                            number: 14,
+                            shape: "triangle"
+                        },
+                        {
+                            number: 14,
+                            shape: "cross"
+                        },
+                        {
+                            number: 14,
+                            shape: "square"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        },
+                        {
+                            number: 20,
+                            shape: "whot"
+                        }
+                    ]
+
+                var computerCAS = []
+
+                var currentPlayer;
+
+                var fiveCount = 0;
+
+                var twoCount = 0;
+
+                function control() {
+                    if (currentPlayer == undefined) {
+                        currentPlayer = Math.floor(Math.random() * 2)
+                    }
+
+                    if (currentPlayer == 0) {
+                        console.log('computer plays')
+                        var x = comp()
+
+                        if (!x) {
+                            if ($('#droppable').find('p').text() == 2 && twoCount != 0){
+                                dashCards(2, currentPlayer)
+                                twoCount = 0
+                                // currentPlayer = 1
+                                // passturn()
+                                control()
+                            } else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
+                                dashCards(3, currentPlayer)
+                                fiveCount = 0
+                                // currentPlayer =1
+                                // passturn()
+                                control()
+                            } else {
+                                setTimeout(function(){
+                                pick(0)
+                                console.log('computer has' + computerCAS.length + 'cards')
+                                passturn()
+                            }, 1000)
+                            }
+
+
+                        } else {
+                            passturn()
+                        }
+                    } else {
+                        console.log('player1 plays')
+                    }
+                }
+
+
+                var cardLeft = availableCard.length
+
+                dashCards(5, 0)
+                dashCards(5, 1)
+                dashCards(1, 3)
+
+                function dashCards(number, player) {
+                    for (i = 0; i<number; i++){
+                        pick(player)
+                    }
+                }
+
+                $('.draggable').draggable({
+                    revert: true
+                })
+
+                function rules(toDrop) {
+                    if($(toDrop).find('p').text() != 2 && $('#droppable').find('p').text() == 2 && twoCount != 0){
+                        dashCards(2, currentPlayer)
+                        twoCount  = 0
+                    } else if ($(toDrop).find('p').text() != 5 && $('#droppable').find('p').text() == 5 && fiveCount != 0) {
+                        dashCards(3, currentPlayer)
+                        fiveCount = 0
+                    }
+                }
+
+                var playerCard;
+                $('#droppable').droppable(
+                    {
+                        drop: function (event, ui) {
+                            var content = $(ui.draggable).find('p').text()
+                            var current = $(this).find('p').text()
+                            var scontent = $(ui.draggable).find('span').text()
+                            var scurrent = $(this).find('span').text()
+
+                            if (content == current || scurrent == scontent || content == 20 || current == 20) {
+                                playerCard =  $(ui.draggable)
+                                $(ui.draggable).css("display", "none")
+                                $(this).find('p').text(content)
+                                $(this).find('span').text(scontent)
+                                if ($(this).find('p').text() == 2){
+                                    twoCount++
+                                    console.log(twoCount + 'twoCount')
+                                } else if ($(this).find('p').text() == 5) {
+                                    fiveCount++
+                                    console.log(fiveCount + 'fiveCount')
+                                }
+                                rules(playerCard)
+                                console.log(twoCount + ' fiveCount' + fiveCount)
+                                setTimeout(function () {
+                                    passturn()
+                                }, 3000)
+
+
+                            } else {
+                                $(ui.draggable).draggable("option", "revert", true)
+                            }
+                        }
+                    }
+
+                )
+
+                    $('#market').on('click', function () {
+                        if ($('#droppable').find('p').text() == 2 && twoCount != 0){
+                                dashCards(2, currentPlayer)
+                                twoCount = 0
+                        } else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
+                            dashCards(3, currentPlayer)
+                            fiveCount = 0
+                        } else {
+                            pick(1)
+                            passturn()
+                        }
+                    })
+
+                    // function fillMarket(){
+
+                    // }
+
+                    function pick(n) {
+                        if (availableCard == 0) {
+                            return
+                        } else {
+                            var r =  Math.floor(Math.random() * availableCard.length)
+                            render(r, n)
+                        }
+
+                    }
+
+                    function render(re, z) {
+                        if (availableCard[re] == undefined) {
+                            console.log(availableCard[re])
+                            pick(n)
+                        } else {
+                            let cardNum = availableCard[re]['number']
+                            let cardShape = availableCard[re]['shape']
+                            var div;
+                            var x ;
+                            if (z == 0) {
+                                x = '#computer'
+                                computerCAS.push(availableCard[re])
+                                div = `<div class="draggable"><p>${cardNum}</p>  <span>${cardShape}</span></div>`
+                            } else if (z == 1) {
+                                x = '#player'
+                                div = `<div class="draggable"><p>${cardNum}</p>  <span>${cardShape}</span></div>`
+                            } else {
+                                x = '#center'
+                                div = `<div id="droppable"><p>${cardNum}</p>  <span>${cardShape}</span></div>`
+                            }
+                            $(x).append(div)
+
+                            $('.draggable').draggable({
+                                revert: true
+                            })
+                            availableCard.splice(re, 1)
+                        }
+                    }
+                    var compCard;
+                    var a;
+                    function comp() {
+                        var p = false
+                        for (let index = 0; index < computerCAS.length; index++) {
+                            let currentNum = $('#droppable').find('p').text()
+                            let currentSha = $('#droppable').find('span').text()
+                            let presentNum = computerCAS[index]['number']
+                            let presentSha = computerCAS[index]['shape']
+                            if (currentNum == presentNum || currentSha == presentSha || currentNum == 20 || presentNum == 20 ) {
+                                $('#computer .draggable').each(function () {
+                                    if($(this).find('p').text() == presentNum && $(this).find('span').text() == presentSha  ){
+
+                                        compCard = $(this)
+                                        if (compCard.find('p').text() == 2) {
+                                            twoCount++
+                                            console.log(twoCount + 'twoCount')
+                                        } else if (compCard.find('p').text() == 5){
+                                            fiveCount++
+                                            console.log(fiveCount + 'fiveCount')
+                                        }
+                                        rules(compCard)
+                                        setTimeout(function(){
+
+                                            compCard.find('p').css('visibility', 'visible')
+                                            compCard.find('span').css('visibility', 'visible')
+
+                                            setTimeout(function () {
+                                                $('#droppable').find('p').text(presentNum)
+                                                $('#droppable').find('span').text(presentSha)
+
+                                                $(compCard).css('visibility', 'hidden')
+                                                compCard.find('p').css('visibility', 'hidden')
+                                                compCard.find('span').css('visibility', 'hidden')
+
+
+                                                setTimeout(function(){
+                                                compCard.css('display', 'none')
+
+
+                                                computerCAS.splice(index, 1)
+                                                return false
+                                                }, 1000)
+
+                                            }, 2000)
+                                        }, 1000)
+                                    }
+                                    p = true
+                                })
+                                break
+                            }
+
+                        }
+                        return p;
+                    }
+
+                    function passturn() {
+                        if (currentPlayer == 0) {
+                            currentPlayer = 1
+                        }
+                         else {
+                            currentPlayer = 0
+                        }
+                        control()
+                    }
+
+
+                    control()
+            })
+
+
+        </script>
+    </body>
+</html>

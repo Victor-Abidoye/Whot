@@ -1,0 +1,57 @@
+#computer {
+    margin-bottom: 20px;
+    display: flex;
+    div {
+        border: 1px black solid;
+        height: 200px;
+        width: 200px;
+        margin: 5px;
+        background-color: red;
+        p {
+            visibility: hidden;
+        }
+        span {
+            visibility: hidden;
+        }
+    }
+}
+
+#market {
+        border: 1px black solid;
+        height: 200px;
+        width: 200px;
+}
+
+#center {
+        display: flex;
+        justify-content: space-between;
+    div {
+        border: 1px black solid;
+        height: 200px;
+        width: 200px;
+
+    }
+    #droppable {
+            margin-right: 200px ;
+            background-color: pink;
+        }
+}
+
+#player {
+    margin-top: 20px;
+    display: flex;
+    div {
+        // float: left;
+        border: 1px black solid;
+        height: 200px;
+        width: 200px;
+        margin: 5px;
+        background-color: blue;
+    }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
