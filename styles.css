@@ -2,15 +2,17 @@
   margin-bottom: 20px;
   display: flex; }
   #computer div {
-    border: 1px black solid;
-    height: 200px;
-    width: 200px;
-    margin: 5px;
-    background-color: red; }
-    #computer div p {
+    margin: 5px; }
+    #computer div div {
       visibility: hidden; }
+    #computer div p {
+      visibility: hidden;
+      margin: 0; }
     #computer div span {
       visibility: hidden; }
+
+span {
+  color: wheat; }
 
 #market {
   border: 1px black solid;
@@ -20,23 +22,18 @@
 #center {
   display: flex;
   justify-content: space-between; }
-  #center div {
-    border: 1px black solid;
-    height: 200px;
-    width: 200px; }
+  #center p {
+    margin: 0; }
   #center #droppable {
-    margin-right: 200px;
-    background-color: pink; }
+    margin-right: 200px; }
 
 #player {
   margin-top: 20px;
   display: flex; }
   #player div {
-    border: 1px black solid;
-    height: 200px;
-    width: 200px;
-    margin: 5px;
-    background-color: blue; }
+    margin: 5px; }
+  #player P {
+    margin: 0; }
 
 .clearfix::after {
   content: "";

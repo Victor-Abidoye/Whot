@@ -2,13 +2,17 @@
     margin-bottom: 20px;
     display: flex;
     div {
-        border: 1px black solid;
-        height: 200px;
-        width: 200px;
+        // border: 1px black solid;
+        // height: 200px;
+        // width: 200px;
         margin: 5px;
-        background-color: red;
+        // background-color: red;
+        div {
+            visibility: hidden;
+        }
         p {
             visibility: hidden;
+            margin: 0;
         }
         span {
             visibility: hidden;
@@ -16,24 +20,27 @@
     }
 }
 
+span {
+    color: wheat;
+}
+
 #market {
         border: 1px black solid;
         height: 200px;
         width: 200px;
+
 }
 
 #center {
         display: flex;
         justify-content: space-between;
-    div {
-        border: 1px black solid;
-        height: 200px;
-        width: 200px;
+        p {
+                margin: 0;
+            }
 
-    }
     #droppable {
             margin-right: 200px ;
-            background-color: pink;
+
         }
 }
 
@@ -41,13 +48,12 @@
     margin-top: 20px;
     display: flex;
     div {
-        // float: left;
-        border: 1px black solid;
-        height: 200px;
-        width: 200px;
         margin: 5px;
-        background-color: blue;
     }
+    P {
+        margin: 0;
+    }
+
 }
 
 .clearfix::after {
