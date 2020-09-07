@@ -16,8 +16,9 @@ span {
 
 #market {
   border: 1px black solid;
-  height: 200px;
-  width: 200px; }
+  height: 250px;
+  width: 200px;
+  background-color: wheat; }
 
 #center {
   display: flex;
