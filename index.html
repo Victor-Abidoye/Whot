@@ -487,8 +487,8 @@
                         currentPlayer = Math.floor(Math.random() * 2)
                     }
 
+                    if (currentPlayer == 0 ) {
 
-                    if (currentPlayer == 0) {
                         console.log('computer plays')
                         var x = comp()
 
@@ -515,17 +515,10 @@
                             }
                         } else {
                             // if the comp function returns true, then the computer has played successfully and the passturn function is called to change the current player
-
-                            passturn()
-
-
-
+                            // passturn()
                         }
                     } else {
-                            // if currentPlayer!= 0 then the next player is alerted to play
-
-                                console.log('player1 plays')
-
+                        console.log('player1 plays')
                     }
                 }
 
@@ -558,10 +551,7 @@
                         alert('2')
                         dashCards(3, currentPlayer)
                         fiveCount = 0
-                    } else if ((toDrop).find('p').text() == 8){
-                        currentPlayer == 0 ? currentPlayer = 1 : currentPlayer = 0
                     }
-
                 }
 
                 // playerCard is a global variable that holds the current card being played by the current player dragging this card
@@ -595,6 +585,11 @@
                                     console.log(fiveCount + 'fiveCount')
                                 } else if ($(playerCard).find('p').text() == 8) {
                                     currentPlayer = 0
+                                } else if ($(playerCard).find('p').text() == 14) {
+                                    dashCards(1, 0)
+                                    currentPlayer = 0
+                                } else if ($(playerCard).find('p').text() == 20){
+                                    // twenty()
                                 }
                                 console.log(twoCount + ' fiveCount' + fiveCount)
                                 setTimeout(function () {
@@ -765,11 +760,20 @@
 
 
                                                 computerCAS.splice(index, 1)
-                                                return false
+                                                    if (compCard.find('p').text() == 8) {
+                                                        currentPlayer = 1
+                                                    } else if (compCard.find('p').text() == 14) {
+                                                        dashCards(1, 1)
+                                                        currentPlayer = 1
+                                                    }
+                                                    // return false
+                                                    passturn()
+                                                    return false
                                                 }, 1000)
 
                                             }, 1000)
                                         }, 1000)
+                                        // return false
                                     }
                                     p = true
                                 })
@@ -784,7 +788,7 @@
                         if (currentPlayer == 0) {
                             currentPlayer = 1
                         }
-                         else {
+                         else if (currentPlayer == 1) {
                            currentPlayer = 0
                         }
 
