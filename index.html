@@ -17,11 +17,11 @@
         <div id="center" class="clearfix">
             <div id="market" ><p></p>  <span>whot</span></div>
             <div id="twenty">
-                <div class="a"><div><i class="fas fa-square" style="font-size: 20px; color:#521717;  "></i></div></div>
-                <div class="a"><div><i class="fas fa-star" style="font-size: 20px; color:#521717;  "></i></div></div>
-                <div class="a"><div><i class="fas fa-circle" style="font-size: 20px; color:#521717;  "></i></div></div>
-                <div class="a"><div><i class="fas fa-cross" style="font-size: 20px; color:#521717;  "></i></div></div>
-                <div class="a"><div><i class="fas fa-play" style="font-size: 20px; color:#521717;  "></i></div></div>
+                <div class="a" id="square"><div><i class="fas fa-square" style="font-size: 20px; color:#521717;  "></i></div></div>
+                <div class="a" id="star"><div><i class="fas fa-star" style="font-size: 20px; color:#521717;  "></i></div></div>
+                <div class="a" id="circle"><div><i class="fas fa-circle" style="font-size: 20px; color:#521717;  "></i></div></div>
+                <div class="a" id="cross"><div><i class="fas fa-cross" style="font-size: 20px; color:#521717;  "></i></div></div>
+                <div class="a" id="triangle"><div><i class="fas fa-play" style="font-size: 20px; color:#521717;  "></i></div></div>
 
             </div>
 
@@ -252,7 +252,7 @@
                 ]
 
                 // current player 1 for player, 0 for computer
-                var currentPlayer
+                var currentPlayer = 1
 
                 // Cards already played
                 var played = []
@@ -330,6 +330,96 @@
                         availableCard.splice(re, 1)
                     }
                 }
+
+                $('#droppable').droppable(
+                    {
+                        drop: function(event, ui) {
+                            var draggedNum = $(ui.draggable).find('p').text()
+                            var draggedSha = $(ui.draggable).find('span').text()
+                            alert()
+                            var v = dropCheck(draggedNum, draggedSha)
+                            if (v == true) {
+                                alert()
+                                $(this).html($(ui.draggable.html()))
+                                $(ui.draggable).css('display', 'none')
+                                if (draggedNum == 2) {
+                                    twoCount++
+                                    passTurn()
+                                } else if (draggedNum == 5) {
+                                    fiveCount++
+                                    passTurn()
+                                } else if (draggedNum == 14) {
+                                    twoCount = 0
+                                    fiveCount = 0
+                                    currentPlayer = 0
+                                    dashCards(1, currentPlayer)
+                                    passTurn()
+                                } else if (draggedNum == 8) {
+                                    twoCount = 0
+                                    fiveCount = 0
+                                    currentPlayer = 0
+                                    passTurn()
+                                } else if (draggedNum == 20) {
+                                    twoCount = 0
+                                    fiveCount = 0
+                                    twenty()
+                                } else {
+                                    twoCount = 0
+                                    fiveCount = 0
+                                    passTurn()
+                                }
+                            }
+                        }
+                    }
+                )
+
+                var twoCount
+                var fiveCount
+                var whotShape
+
+                function dropCheck(p, span) {
+                    var dropNum = $('#droppable').find('p').text()
+                    var dropSha = $('#droppable').find('span').text()
+                    alert()
+                    if (dropNum == 2) {
+                        if(p == 2) {
+                            twoCount++
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else if (dropNum == 5) {
+                        if (p == 5) {
+                            fiveCount++
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else if (dropNum == 8){
+                        return true
+                    } else if (dropNum == 20) {
+                        if (p == 20 || span == whotShape){
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else if (p == dropNum || span == dropSha || p == 20) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+
+                function twenty() {
+                    $('#twenty').css('visibility', 'visible')
+                    $('.a').on('click', function(){
+                        whotShape = $(this).attr('id')
+                        $('#twenty').css('visibility', 'hidden')
+                        passTurn()
+                    })
+
+                }
+
                 dashCards(5, 0)
                 dashCards(5, 1)
                 dashCards(1)
