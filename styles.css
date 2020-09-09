@@ -26,7 +26,23 @@ span {
   #center p {
     margin: 0; }
   #center #droppable {
-    margin-right: 200px; }
+    margin-right: 100px; }
+  #center #twenty {
+    height: 250px;
+    width: 200px;
+    background-color: wheat;
+    visibility: hidden; }
+    #center #twenty .a {
+      float: left;
+      height: 60px;
+      width: 60px;
+      margin: 10px;
+      background: white;
+      position: relative; }
+      #center #twenty .a div {
+        position: absolute;
+        top: 30%;
+        left: 30%; }
 
 #player {
   margin-top: 20px;

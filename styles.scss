@@ -36,11 +36,30 @@ span {
         justify-content: space-between;
         p {
                 margin: 0;
-            }
+        }
 
     #droppable {
-            margin-right: 200px ;
+            margin-right: 100px ;
 
+        }
+        #twenty {
+            height: 250px;
+            width: 200px;
+            background-color: wheat;
+            visibility: hidden;
+            .a {
+                float: left;
+                height: 60px;
+                width: 60px;
+                margin: 10px;
+                background: white;
+                position: relative;
+                div {
+                    position: absolute;
+                    top: 30%;
+                    left: 30%;
+                }
+            }
         }
 }
 
