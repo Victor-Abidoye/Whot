@@ -330,10 +330,10 @@
                         availableCard.splice(re, 1)
                     }
                 }
-
+                $('#draggable').draggable()
                 $('#droppable').droppable(
                     {
-                        drop: function(event, ui) {
+                        drop: function(event, ui){
                             var draggedNum = $(ui.draggable).find('p').text()
                             var draggedSha = $(ui.draggable).find('span').text()
                             alert()
