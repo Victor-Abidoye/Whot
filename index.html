@@ -321,54 +321,59 @@
                         }
                         $(x).append(div)
 
-                        if (currentPlayer == 1) {
+
                             $('.draggable').draggable({
                                 revert: true
                             })
-                        }
+
 
                         availableCard.splice(re, 1)
                     }
                 }
-                $('#draggable').draggable()
+                $('.draggable').draggable()
                 $('#droppable').droppable(
                     {
                         drop: function(event, ui){
-                            var draggedNum = $(ui.draggable).find('p').text()
-                            var draggedSha = $(ui.draggable).find('span').text()
-                            alert()
-                            var v = dropCheck(draggedNum, draggedSha)
-                            if (v == true) {
-                                alert()
-                                $(this).html($(ui.draggable.html()))
-                                $(ui.draggable).css('display', 'none')
-                                if (draggedNum == 2) {
-                                    twoCount++
-                                    passTurn()
-                                } else if (draggedNum == 5) {
-                                    fiveCount++
-                                    passTurn()
-                                } else if (draggedNum == 14) {
-                                    twoCount = 0
-                                    fiveCount = 0
-                                    currentPlayer = 0
-                                    dashCards(1, currentPlayer)
-                                    passTurn()
-                                } else if (draggedNum == 8) {
-                                    twoCount = 0
-                                    fiveCount = 0
-                                    currentPlayer = 0
-                                    passTurn()
-                                } else if (draggedNum == 20) {
-                                    twoCount = 0
-                                    fiveCount = 0
-                                    twenty()
-                                } else {
-                                    twoCount = 0
-                                    fiveCount = 0
-                                    passTurn()
-                                }
-                            }
+                            $(this)
+                            .addClass( "ui-state-highlight" )
+                            .find( "p" )
+                            .html( "Dropped!" );
+                                alert($(this).html())
+                            // var draggedNum = $(ui.draggable).find('p').text()
+                            // var draggedSha = $(ui.draggable).find('span').text()
+                            // alert()
+                            // var v = dropCheck(draggedNum, draggedSha)
+                            // if (v == true) {
+                            //     alert()
+                            //     $(this).html($(ui.draggable.html()))
+                            //     $(ui.draggable).css('display', 'none')
+                            //     if (draggedNum == 2) {
+                            //         twoCount++
+                            //         passTurn()
+                            //     } else if (draggedNum == 5) {
+                            //         fiveCount++
+                            //         passTurn()
+                            //     } else if (draggedNum == 14) {
+                            //         twoCount = 0
+                            //         fiveCount = 0
+                            //         currentPlayer = 0
+                            //         dashCards(1, currentPlayer)
+                            //         passTurn()
+                            //     } else if (draggedNum == 8) {
+                            //         twoCount = 0
+                            //         fiveCount = 0
+                            //         currentPlayer = 0
+                            //         passTurn()
+                            //     } else if (draggedNum == 20) {
+                            //         twoCount = 0
+                            //         fiveCount = 0
+                            //         twenty()
+                            //     } else {
+                            //         twoCount = 0
+                            //         fiveCount = 0
+                            //         passTurn()
+                            //     }
+                            // }
                         }
                     }
                 )
