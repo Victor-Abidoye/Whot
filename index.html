@@ -423,7 +423,20 @@
 
                 }
 
-
+                $('#market').on('click', function(){
+                    if ($('droppable').find('p').text() == 2 && twoCount != 0) {
+                        dashCards(2 * twoCount, currentPlayer)
+                        twoCount = 0
+                        passTurn()
+                    }else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
+                        dashCards(3 * fiveCount, currentPlayer)
+                        fiveCount = 0
+                        passTurn()
+                    } else {
+                        dashCards(1, currentPlayer)
+                        passTurn()
+                    }
+                })
             })
 
 
