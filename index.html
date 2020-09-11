@@ -257,6 +257,8 @@
                 // Cards already played
                 var played = []
 
+                var computerCAS = []
+
                 // The dashCards functions calls on the pick function 'number' number of times to dash out cards to a particulay player
                 function dashCards(number, player) {
                     for (i = 0; i<number; i++){
@@ -264,6 +266,10 @@
                     }
                 }
 
+                dashCards(5, 0)
+                dashCards(5, 1)
+                dashCards(1)
+                // console.log(computerCAS)
                 // The pick function picks a random card from the availableCard array
                 function pick(n) {
                     if (availableCard.length == 0) {
@@ -275,9 +281,7 @@
                     }
                 }
 
-                dashCards(5, 0)
-                dashCards(5, 1)
-                dashCards(1)
+
 
                 // The render function takes in the index number of the random generated number and the currentPlayer and display cards for each player
                 function render(re, z) {
@@ -311,10 +315,11 @@
                             shapes = w
                         }
 
-                        var computerCAS = []
+
                         if (z == 0) {
                             x = '#computer'
                             computerCAS.push(availableCard[re])
+
                             div = `<div class="ndraggable" style="height: 250px; width: 200px; background-color: wheat; position: relative;"><p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span>${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 4px; right: 4px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div></div>`
                         } else if (z == 1) {
                             x = '#player'
@@ -384,14 +389,14 @@
                     var dropNum = $('#droppable').find('p').text()
                     var dropSha = $('#droppable').find('span').text()
                     // alert()
-                    if (dropNum == 2) {
+                    if (dropNum == 2 && twoCount > 0) {
                         if(p == 2) {
                             twoCount++
                             return true
                         } else {
                             return false
                         }
-                    } else if (dropNum == 5) {
+                    } else if (dropNum == 5 && fiveCount > 0) {
                         if (p == 5) {
                             fiveCount++
                             return true
@@ -402,6 +407,7 @@
                         return true
                     } else if (dropNum == 20) {
                         if (p == 20 || span == whotShape){
+                            whotShape = ''
                             return true
                         } else {
                             return false
@@ -424,20 +430,135 @@
                 }
 
                 $('#market').on('click', function(){
-                    if ($('droppable').find('p').text() == 2 && twoCount != 0) {
+                    if ($('#droppable').find('p').text() == 2 && twoCount != 0) {
+                        alert(2)
                         dashCards(2 * twoCount, currentPlayer)
                         twoCount = 0
-                        passTurn()
                     }else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
+                        alert(3)
                         dashCards(3 * fiveCount, currentPlayer)
                         fiveCount = 0
-                        passTurn()
                     } else {
                         dashCards(1, currentPlayer)
                         passTurn()
                     }
                 })
-            })
+
+            function passTurn() {
+                if (currentPlayer == 1) {
+                    currentPlayer = 0
+                    console.log(computerCAS)
+                } else {
+                    console.log('b')
+                    currentPlayer = 1
+                }
+                control()
+            }
+
+            function control() {
+                if (currentPlayer == 0) {
+                    comp()
+                }
+            }
+
+            var compcard;
+            function comp() {
+                var p =  $('#droppable').find('p').text()
+                var span  = $('#droppable').find('span').text()
+
+                for (let i = 0; i < computerCAS.length; i++) {
+                    var presentNum = computerCAS[i]['number']
+                    var presentSha = computerCAS[i]['shape']
+                    console.log(presentSha + ' ' + span)
+
+                    if(p == presentNum || span == presentSha || presentNum == 20 || (p == 20 && presentSha == whotShape)){
+                        console.log('a')
+                        var y = dropCheck(presentNum, presentSha)
+                        if(y == true){
+                            alert(true)
+                            $('.ndraggable').each(function () {
+                                if($(this).find('p').text() == presentNum && $(this).find('span').text() == presentSha){
+                                    compCard = $(this)
+                                    setTimeout(function () {
+                                        compCard.children().css('visibility', 'visible')
+                                        setTimeout(function(){
+                                            $('#droppable').html(compCard.html())
+                                            compCard.css('display', 'none')
+
+                                            if (presentNum == 2) {
+                                                twoCount++
+                                                passTurn()
+                                            } else if (presentNum == 5) {
+                                                fiveCount++
+                                                passTurn()
+                                            } else if (presentNum == 14) {
+                                                twoCount = 0
+                                                fiveCount = 0
+                                                currentPlayer = 1
+                                                dashCards(1, currentPlayer)
+                                                passTurn()
+                                            } else if (presentNum == 8) {
+                                                twoCount = 0
+                                                fiveCount = 0
+                                                currentPlayer = 1
+                                                passTurn()
+                                            } else if (presentNum == 20) {
+                                                twoCount = 0
+                                                fiveCount = 0
+                                                compTwenty()
+                                            } else {
+                                                twoCount = 0
+                                                fiveCount = 0
+                                                passTurn()
+                                            }
+                                            computerCAS.splice(i, 1)
+                                            return false
+                                        }, 1000)
+                                    }, 1000)
+
+                                }
+                            })
+                        } else {
+                            if (p == 2 && twoCount != 0) {
+                                dashCards(2 * twoCount, currentPlayer)
+                                currentPlayer = 1
+                                twoCount = 0
+                                passTurn()
+                            } else if (p == 5 && fiveCount != 0){
+                                dashCards(3 * fiveCount, currentPlayer)
+                                currentPlayer = 1
+                                fiveCount = 0
+                                passTurn()
+                            } else {
+                                // alert(false)
+                                dashCards(1, currentPlayer)
+                                passTurn()
+                            }
+
+                        }
+                        break
+                    }
+                    else if (i == computerCAS.length - 1) {
+                        alert('abc')
+                        dashCards(1, currentPlayer)
+                        passTurn()
+                        break
+                    }
+
+                }
+            }
+
+            function compTwenty() {
+                var myShape = ['square', 'circle', 'cross', 'triangle', 'star']
+                var random = Math.floor(Math.random() * 5)
+                whotShape = myShape[random]
+                alert(whotShape)
+                passTurn()
+            }
+
+
+        })
+
 
 
         </script>
