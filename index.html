@@ -251,6 +251,10 @@
                     }
                 ]
 
+                var twoCount = 0
+                var fiveCount = 0
+                var whotShape = 0
+
                 // current player 1 for player, 0 for computer
                 var currentPlayer = 1
 
@@ -347,14 +351,19 @@
                             var draggedSha = $(ui.draggable).find('span').text()
                             var v = dropCheck(draggedNum, draggedSha)
                             if (v == true) {
-                                alert()
+                                // alert()
                                 $(this).html($(ui.draggable.html()))
+                                var obj = {
+                                    number: draggedNum,
+                                    shape: draggedSha
+                                }
+                                played.push(obj)
                                 $(ui.draggable).css('display', 'none')
                                 if (draggedNum == 2) {
-                                    twoCount++
+                                    alert(twoCount)
                                     passTurn()
                                 } else if (draggedNum == 5) {
-                                    fiveCount++
+                                    alert(fiveCount)
                                     passTurn()
                                 } else if (draggedNum == 14) {
                                     twoCount = 0
@@ -381,9 +390,7 @@
                     }
                 )
 
-                var twoCount
-                var fiveCount
-                var whotShape
+
 
                 function dropCheck(p, span) {
                     var dropNum = $('#droppable').find('p').text()
@@ -394,6 +401,7 @@
                             twoCount++
                             return true
                         } else {
+                            alert('no')
                             return false
                         }
                     } else if (dropNum == 5 && fiveCount > 0) {
@@ -401,6 +409,7 @@
                             fiveCount++
                             return true
                         } else {
+                            alert('no')
                             return false
                         }
                     } else if (dropNum == 8){
@@ -408,11 +417,24 @@
                     } else if (dropNum == 20) {
                         if (p == 20 || span == whotShape){
                             whotShape = ''
+                            if (p == 2){
+                                twoCount++
+                            } else if (p == 5){
+                                fiveCount++
+                            }
                             return true
                         } else {
                             return false
                         }
                     } else if (p == dropNum || span == dropSha || p == 20) {
+                        if(p == 2){
+                            twoCount++
+                            alert('heres')
+                        } else if (p == 5 ){
+                            fiveCount++
+                            alert('heres')
+                        }
+                        console.log('step 1')
                         return true
                     } else {
                         return false
@@ -431,11 +453,11 @@
 
                 $('#market').on('click', function(){
                     if ($('#droppable').find('p').text() == 2 && twoCount != 0) {
-                        alert(2)
+                        // alert(2)
                         dashCards(2 * twoCount, currentPlayer)
                         twoCount = 0
                     }else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
-                        alert(3)
+                        // alert(3)
                         dashCards(3 * fiveCount, currentPlayer)
                         fiveCount = 0
                     } else {
@@ -448,16 +470,22 @@
                 if (currentPlayer == 1) {
                     currentPlayer = 0
                     console.log(computerCAS)
+                    setTimeout(function () {
+                        control()
+                    }, 1000)
                 } else {
                     console.log('b')
                     currentPlayer = 1
+                    control()
                 }
-                control()
+
             }
 
             function control() {
                 if (currentPlayer == 0) {
                     comp()
+                } else {
+                    console.log('human plays')
                 }
             }
 
@@ -466,16 +494,20 @@
                 var p =  $('#droppable').find('p').text()
                 var span  = $('#droppable').find('span').text()
 
+                var x = false
+
                 for (let i = 0; i < computerCAS.length; i++) {
                     var presentNum = computerCAS[i]['number']
                     var presentSha = computerCAS[i]['shape']
-                    console.log(presentSha + ' ' + span)
+                    // console.log(presentSha + ' ' + span)
+
 
                     if(p == presentNum || span == presentSha || presentNum == 20 || (p == 20 && presentSha == whotShape)){
-                        console.log('a')
+                        x = true
+                        // console.log('a')
                         var y = dropCheck(presentNum, presentSha)
                         if(y == true){
-                            alert(true)
+                            // alert(true)
                             $('.ndraggable').each(function () {
                                 if($(this).find('p').text() == presentNum && $(this).find('span').text() == presentSha){
                                     compCard = $(this)
@@ -483,19 +515,23 @@
                                         compCard.children().css('visibility', 'visible')
                                         setTimeout(function(){
                                             $('#droppable').html(compCard.html())
+                                            var obj = {
+                                                number: presentNum,
+                                                shape: presentSha
+                                            }
+                                            played.push(obj)
                                             compCard.css('display', 'none')
 
                                             if (presentNum == 2) {
-                                                twoCount++
                                                 passTurn()
                                             } else if (presentNum == 5) {
-                                                fiveCount++
                                                 passTurn()
                                             } else if (presentNum == 14) {
                                                 twoCount = 0
                                                 fiveCount = 0
                                                 currentPlayer = 1
-                                                dashCards(1, currentPlayer)
+                                                console.log('heress')
+                                                dashCards(1, 1)
                                                 passTurn()
                                             } else if (presentNum == 8) {
                                                 twoCount = 0
@@ -505,7 +541,9 @@
                                             } else if (presentNum == 20) {
                                                 twoCount = 0
                                                 fiveCount = 0
+                                                console.log('step 2')
                                                 compTwenty()
+                                                passTurn()
                                             } else {
                                                 twoCount = 0
                                                 fiveCount = 0
@@ -518,49 +556,63 @@
 
                                 }
                             })
+                            break
                         } else {
                             if (p == 2 && twoCount != 0) {
-                                dashCards(2 * twoCount, currentPlayer)
-                                currentPlayer = 1
-                                twoCount = 0
-                                passTurn()
+                                alert('pick 2')
+                                setTimeout(function(){
+                                    dashCards(2 * twoCount, currentPlayer)
+                                    currentPlayer = 1
+                                    twoCount = 0
+                                    passTurn()
+                                }, 1000)
                             } else if (p == 5 && fiveCount != 0){
-                                dashCards(3 * fiveCount, currentPlayer)
-                                currentPlayer = 1
-                                fiveCount = 0
-                                passTurn()
+                                setTimeout(function(){
+                                    alert('pick 5')
+                                    dashCards(3 * fiveCount, currentPlayer)
+                                    currentPlayer = 1
+                                    fiveCount = 0
+                                    passTurn()
+                                },  1000)
                             } else {
-                                // alert(false)
-                                dashCards(1, currentPlayer)
-                                passTurn()
+                                setTimeout(function(){
+                                    dashCards(1, currentPlayer)
+                                    passTurn()
+                                }, 1000)
                             }
-
                         }
                         break
                     }
-                    else if (i == computerCAS.length - 1) {
-                        alert('abc')
+                }
+
+                if (!x){
+                    if (p == 2){
+                        dashCards(2 * twoCount, currentPlayer)
+                        twoCount = 0
+                        twoCount = 0
+                    } else if (p == 5){
+                        dashCards(3 * fiveCount, currentPlayer)
+                        fiveCount = 0
+                        control()
+                    } else {
+                        setTimeout(function(){
                         dashCards(1, currentPlayer)
                         passTurn()
-                        break
+                    }, 1000)
                     }
-
                 }
             }
 
             function compTwenty() {
+                console.log('step 3')
                 var myShape = ['square', 'circle', 'cross', 'triangle', 'star']
                 var random = Math.floor(Math.random() * 5)
                 whotShape = myShape[random]
                 alert(whotShape)
-                passTurn()
             }
 
-
+            console.log(computerCAS)
         })
-
-
-
         </script>
     </body>
 </html>
