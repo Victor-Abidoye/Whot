@@ -1,3 +1,24 @@
+body {
+  padding: 0;
+  margin: 0; }
+
+section {
+  margin-top: 30px; }
+
+.top {
+  width: 100%;
+  height: 30px;
+  background-color: maroon;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
+  .top p {
+    margin: 0; }
+  .top h2 {
+    text-align: center;
+    color: whitesmoke;
+    margin: 0; }
+
 #computer {
   margin-bottom: 20px;
   display: flex; }
@@ -46,7 +67,8 @@ span {
 
 #player {
   margin-top: 20px;
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
   #player div {
     margin: 5px; }
   #player P {
