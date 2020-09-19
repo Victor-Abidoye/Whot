@@ -259,8 +259,8 @@
                     }
                 ]
 
-                var twoCount = 0
-                var fiveCount = 0
+                var twoCount = false
+                var fiveCount = false
                 var whotShape = 0
 
                 // current player 1 for player, 0 for computer
@@ -362,7 +362,6 @@
                             var draggedSha = $(ui.draggable).find('span').text()
                             var v = dropCheck(draggedNum, draggedSha)
                             if (v == true) {
-                                // alert()
                                 $(this).html($(ui.draggable.html()))
                                 var obj = {
                                     number: draggedNum,
@@ -375,24 +374,24 @@
                                 } else if (draggedNum == 5) {
                                     passTurn()
                                 } else if (draggedNum == 14) {
-                                    twoCount = 0
-                                    fiveCount = 0
+                                    twoCount = false
+                                    fiveCount = false
                                     currentPlayer = 0
                                     dashCards(1, currentPlayer)
-                                    $('h2').text(mes[2])
+                                    $('h2').text(mes[10])
                                     passTurn()
                                 } else if (draggedNum == 8) {
-                                    twoCount = 0
-                                    fiveCount = 0
+                                    twoCount = false
+                                    fiveCount = false
                                     currentPlayer = 0
                                     passTurn()
                                 } else if (draggedNum == 20) {
-                                    twoCount = 0
-                                    fiveCount = 0
+                                    twoCount = false
+                                    fiveCount = false
                                     twenty()
                                 } else {
-                                    twoCount = 0
-                                    fiveCount = 0
+                                    twoCount = false
+                                    fiveCount = false
                                     passTurn()
                                 }
                                 playerCAS--
@@ -409,16 +408,16 @@
                 function dropCheck(p, span) {
                     var dropNum = $('#droppable').find('p').text()
                     var dropSha = $('#droppable').find('span').text()
-                    if (dropNum == 2 && twoCount > 0) {
+                    if (dropNum == 2 && twoCount == true) {
                         if(p == 2) {
-                            twoCount++
+                            twoCount = false
                             return true
                         } else {
                             return false
                         }
-                    } else if (dropNum == 5 && fiveCount > 0) {
+                    } else if (dropNum == 5 && fiveCount == true) {
                         if (p == 5) {
-                            fiveCount++
+                            fiveCount = false
                             return true
                         } else {
                             return false
@@ -428,10 +427,10 @@
                     } else if (dropNum == 20) {
                         if (p == 20 || span == whotShape){
                             whotShape = ''
-                            if (p == 2){
-                                twoCount++
+                            if (p == 2 ){
+                                twoCount = true
                             } else if (p == 5){
-                                fiveCount++
+                                fiveCount = true
                             }
                             return true
                         } else {
@@ -439,9 +438,9 @@
                         }
                     } else if (p == dropNum || span == dropSha || p == 20) {
                         if(p == 2){
-                            twoCount++
+                            twoCount = true
                         } else if (p == 5 ){
-                            fiveCount++
+                            fiveCount = true
                         }
                         return true
                     } else {
@@ -460,14 +459,16 @@
                 }
 
                 $('#market').on('click', function(){
-                    if ($('#droppable').find('p').text() == 2 && twoCount != 0) {
-                        dashCards(2 * twoCount, 1)
-                        $('h2').text(mes[3] + 2 * twoCount + ' cards. You can play now')
-                        twoCount = 0
-                    }else if ($('#droppable').find('p').text() == 5 && fiveCount != 0) {
-                        dashCards(3 * fiveCount, 1)
-                        $('h2').text(mes[4] + 3 * fiveCount + ' cards. You can play now')
-                        fiveCount = 0
+                    if ($('#droppable').find('p').text() == 2 && twoCount == true) {
+                        dashCards(2,  1)
+                        // $('h2').text(mes[3] + 2 + ' cards. You can play now')
+                        twoCount = false
+                        passTurn()
+                    }else if ($('#droppable').find('p').text() == 5 && fiveCount == true ) {
+                        dashCards(3 , 1)
+                        $('h2').text(mes[4] + 3 + ' cards. You can play now')
+                        fiveCount = false
+                        passTurn()
                     } else {
                         dashCards(1, 1)
                         $('h2').text(mes[2])
@@ -488,7 +489,7 @@
 
             }
 
-            var mes = ["Player 1's turn", "Computer is playing", "You picked a card", "You Picked ", "You picked ", "Computer picked a card", "computer picked ", "Computer picked ", "General market for you", "LAST CARD" ]
+            var mes = ["Player 1's turn", "Computer is playing", "You picked a card", "You Picked ", "You picked ", "Computer picked a card", "computer picked ", "Computer picked ", "General market for you", "LAST CARD", "Computer picked a card" ]
 
             function control() {
                 if (currentPlayer == 0) {
@@ -541,25 +542,25 @@
                                             } else if (presentNum == 5) {
                                                 passTurn()
                                             } else if (presentNum == 14) {
-                                                twoCount = 0
-                                                fiveCount = 0
+                                                twoCount = false
+                                                fiveCount = false
                                                 currentPlayer = 1
                                                 dashCards(1, 1)
                                                 $('h2').text(mes[8])
                                                 passTurn()
                                             } else if (presentNum == 8) {
-                                                twoCount = 0
-                                                fiveCount = 0
+                                                twoCount = false
+                                                fiveCount = false
                                                 currentPlayer = 1
                                                 passTurn()
                                             } else if (presentNum == 20) {
-                                                twoCount = 0
-                                                fiveCount = 0
+                                                twoCount = false
+                                                fiveCount = false
                                                 compTwenty()
                                                 passTurn()
                                             } else {
-                                                twoCount = 0
-                                                fiveCount = 0
+                                                twoCount = false
+                                                fiveCount = false
                                                 passTurn()
                                             }
                                             computerCAS.splice(i, 1)
@@ -574,28 +575,25 @@
                             })
                             break
                         } else {
-                            if (p == 2 && twoCount != 0) {
+                            if (p == 2 && twoCount == true) {
                                 setTimeout(function(){
-                                    dashCards(2 * twoCount, currentPlayer)
-                                    $('h2').text(mes[6] + 2 * twoCount + ' cards')
+                                    dashCards(2, currentPlayer)
+                                    $('h2').text(mes[6] + 2 + ' cards')
                                     setTimeout(function () {
-                                        currentPlayer = 1
-                                        twoCount = 0
+                                        twoCount = false
                                         passTurn()
                                     }, 1000)
                                 }, 1000)
-                            } else if (p == 5 && fiveCount != 0){
+                            } else if (p == 5 && fiveCount == true){
                                 setTimeout(function(){
-                                    dashCards(3 * fiveCount, currentPlayer)
-                                    $('h2').text(mes[7] + 3 * fiveCount + ' cards')
+                                    dashCards(3 , currentPlayer)
+                                    $('h2').text(mes[7] + 3 + ' cards')
                                     setTimeout(function () {
-                                        currentPlayer = 1
-                                        fiveCount = 0
+                                        fiveCount = false
                                         passTurn()
                                     }, 1000)
                                 },  1000)
                             } else {
-                                console.log('pick dear')
                                 setTimeout(function(){
                                     dashCards(1, currentPlayer)
                                     $('h2').text(mes[5])
@@ -610,20 +608,19 @@
                 }
 
                 if (!x){
-                    if (p == 2){
-                        dashCards(2 * twoCount, currentPlayer)
-                        $('h2').text(mes[6] + 2 * twoCount + ' cards')
+                    if (p == 2 && twoCount ==true){
+                        dashCards(2 , currentPlayer)
+                        $('h2').text(mes[6] + 2 + ' cards')
                         setTimeout(function () {
-                            twoCount = 0
-                            twoCount = 0
+                            twoCount = false
                             control()
                         }, 1000)
 
-                    } else if (p == 5){
-                        dashCards(3 * fiveCount, currentPlayer)
-                        $('h2').text(mes[7] + 3 * fiveCount + ' cards')
+                    } else if (p == 5 && fiveCount == true){
+                        dashCards(3 , currentPlayer)
+                        $('h2').text(mes[7] + 3  + ' cards')
                         setTimeout(function () {
-                            fiveCount = 0
+                            fiveCount = false
                             control()
                         }, 1000)
 
