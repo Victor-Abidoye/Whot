@@ -1,37 +1,42 @@
 body {
     padding: 0;
     margin: 0;
+    background-image: url('green.jpg');
 }
 
-section {
-    margin-top: 30px;
-}
 
 .top {
     width: 100%;
-    height: 30px;
+    height: 50px;
     background-color: maroon;
     position: fixed;
-    top: 0;
+    bottom: 0;
     z-index: 1;
     p {
         margin: 0;
     }
     h2 {
         text-align: center;
-        color: whitesmoke;
+        padding-top: 5px;
+        color: red;
         margin: 0;
+        animation-name: blink;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        font-size: 30px;
     }
 }
+
+@keyframes blink {
+    0% {color: red;}
+    50%{color: white;}
+}
+
 #computer {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     div {
-        // border: 1px black solid;
-        // height: 200px;
-        // width: 200px;
         margin: 5px;
-        // background-color: red;
         div {
             visibility: hidden;
         }
@@ -42,6 +47,15 @@ section {
         span {
             visibility: hidden;
         }
+        h3 {
+            visibility: hidden;
+        }
+        h1 {
+            visibility: hidden;
+        }
+        h4 {
+            visibility: hidden;
+        }
     }
 }
 
@@ -50,15 +64,14 @@ span {
 }
 
 #market {
-        border: 1px black solid;
-        height: 250px;
+        height: 235px;
         width: 200px;
-        background-color: wheat;
+        background-color: white;
+        border-radius: 3%;
 }
 
 #center {
         display: flex;
-        justify-content: space-between;
         p {
                 margin: 0;
         }
@@ -68,13 +81,17 @@ span {
 
         }
         #twenty {
-            height: 250px;
+            height: 235px;
             width: 200px;
             background-color: wheat;
             visibility: hidden;
+            margin: 0 70px;
+            // overflow: scroll;
+            display: flex;
+            flex-wrap: wrap;
+
             .a {
-                float: left;
-                height: 60px;
+                height: 45px;
                 width: 60px;
                 margin: 10px;
                 background: white;
@@ -89,10 +106,8 @@ span {
 }
 
 #player {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
-    flex-wrap: wrap;
-    // flex-direction: column;
     div {
         margin: 5px;
     }
@@ -102,8 +117,25 @@ span {
 
 }
 
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+h1 {
+    text-align: center;
+    color: #521717;
+    font-size: 40px;
+    }
+    #one {
+        transform: rotateY(180deg) rotateX(180deg);
+        margin: 0;
+        // padding-right: 20px;
+    }
+    #two {
+        margin: 0;
+    }
+
+    .card {
+        position: relative;
+    }
+    h4 {
+        color:#521717;
+        margin: 0;
+        padding-left: 10px;
+    }
