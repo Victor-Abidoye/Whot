@@ -29,22 +29,10 @@ body {
     color: white; } }
 #computer {
   margin-bottom: 10px;
-  display: flex; }
+  display: flex;
+  flex-wrap: nowrap; }
   #computer div {
     margin: 5px; }
-    #computer div div {
-      visibility: hidden; }
-    #computer div p {
-      visibility: hidden;
-      margin: 0; }
-    #computer div span {
-      visibility: hidden; }
-    #computer div h3 {
-      visibility: hidden; }
-    #computer div h1 {
-      visibility: hidden; }
-    #computer div h4 {
-      visibility: hidden; }
 
 span {
   color: wheat; }
@@ -107,5 +95,14 @@ h4 {
   color: #521717;
   margin: 0;
   padding-left: 10px; }
+
+.ones {
+  transform: rotateY(180deg) rotateX(180deg);
+  padding-right: 20px;
+  margin-bottom: -15px;
+  /* margin-top: 0; */ }
+
+.twos {
+  margin: 0; }
 
 /*# sourceMappingURL=styles.css.map */
