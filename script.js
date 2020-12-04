@@ -286,12 +286,37 @@ function render (re, z) {
             x = '#computer'
             computerCAS.push(availableCard[re])
 
-            div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><div style="height: 235px; width: 200px; margin: 0; background-color: #521717;" class="temp card fas fa-whot twe"><div class="temp" style="position: relative; top: 20%;"><h1 style="color:white" class="ones">whot</h1><h1 style="color: white" class="twos">whot</h1>
-            </div><div id="${cardShape + cardNum}" style="display: none;"><p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div></div>`
+            div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
+                        <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
+                            <div style="position: relative; top: 20%;">
+                                <h1 style="color:white" class="ones">whot</h1>
+                                <h1 style="color: white" class="twos">whot</h1>
+                            </div>
+                        </div>
+                        <div id="${cardShape + cardNum}" style="display: none;">
+                            <p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span
+                                style="visibility: hidden;">${cardShape}</span>
+                            <div style="position: absolute; top: 33px; left: 7px; "> <i class="${shapes}"
+                                    style="font-size: 20px; color:#521717;"></i></div>
+                            <div style="position: absolute; top: 70px; left: 50px; "> <i class="${shapes}"
+                                    style="font-size: 100px; color:#521717;  "></i></div>
+                            <div style="position: absolute; bottom: 32px; right: 12px; "> <i class="${shapes}"
+                                    style="font-size: 20px; color:#521717; "></i></div>
+                            <h3
+                                style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">
+                                ${cardNum}</h3>
+                        </div>
+                    </div>`
         } else if (z == 1) {
             x = '#player'
             playerCAS++
-            div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
+            div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
+                <p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
+                <div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div>
+                <div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div>
+                <div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div>
+                <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3>
+                </div>`
         } else {
             if (cardNum == 20) {
                 dashCards(1)
@@ -605,6 +630,8 @@ function comp () {
                                     tempo.children[counter].style.visibility = 'visible'
                                 }
                             }
+                            // console.log(document.querySelector(`#${presentSha + presentNum}`).nextElementSibling)
+                            document.querySelector(`#${presentSha + presentNum}`).previousElementSibling.style.display = 'none'
                             document.querySelector(`#${presentSha + presentNum}`).style.display = ''
                             setTimeout(function () {
                                 $('#droppable').html(compCard.html())

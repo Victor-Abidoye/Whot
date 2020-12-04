@@ -29,8 +29,7 @@ body {
     color: white; } }
 #computer {
   margin-bottom: 10px;
-  display: flex;
-  flex-wrap: nowrap; }
+  display: flex; }
   #computer div {
     margin: 5px; }
 
