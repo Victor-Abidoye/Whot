@@ -132,3 +132,14 @@ h1 {
     .twos {
         margin: 0;
     }
+
+    .roll {
+        animation-name: rolling;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes rolling {
+        0% {transform: rotateY(180deg);}
+        100% {transform: rotateY(0deg);}
+    }
