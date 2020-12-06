@@ -821,8 +821,8 @@ function compTwenty () {
 }
 
 function nnow () {
-    // scoreSetter()
-    Store.setPlayer(names.value)
+    scoreSetter()
+    // Store.setPlayer(names.value)
     Store.setBoardHistory()
     // backgroundSound.pause()
     var backgroundSound = document.createElement('audio')
@@ -871,7 +871,8 @@ let scoreSetter = () => {
     let index
     let player
     for ([index, player] of historys.entries()) {
-        if (player.name == my_name && my_name != '') {
+        console.log(player)
+        if (player.name == my_name || my_name == '') {
             return
         }
     }
@@ -887,6 +888,12 @@ class Store {
         if (player == '') {
             return
         }
+
+        // let index
+        // let player
+        // for ([index, player] of historys.entries()) {
+
+        // }
         const new_player = {
             name: player,
             comp_score: 0,
@@ -947,6 +954,6 @@ function dee(event) {
     console.log(event)
 }
 
-document.querySelector('#dee').addEventListener('click', alert('ggg'))
+// document.querySelector('#dee').addEventListener('click', alert('ggg'))
 
 fillData()
