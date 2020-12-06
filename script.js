@@ -1,4 +1,4 @@
-// $('#staticBackdrop').modal('show')
+$('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
     {
@@ -288,7 +288,7 @@ function render (re, z) {
 
             div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
-                            <div style="position: relative; top: 20%;">
+                            <div style="position: relative; top: 28%;">
                                 <h1 style="color:white" class="ones">whot</h1>
                                 <h1 style="color: white" class="twos">whot</h1>
                             </div>
@@ -337,7 +337,7 @@ function render (re, z) {
         if (cardNum == 20 && z == 0) {
             div = `<div style="height: 235px; width: 200px; border: 0; position:relative; background-color: white;" class="card ${a} twe">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
-                            <div style="position: relative; top: 20%;">
+                            <div style="position: relative; top: 28%;">
                                 <h1 style="color:white" class="ones">whot</h1>
                                 <h1 style="color: white" class="twos">whot</h1>
                             </div>
@@ -821,6 +821,9 @@ function compTwenty () {
 }
 
 function nnow () {
+    // scoreSetter()
+    Store.setPlayer(names.value)
+    Store.setBoardHistory()
     // backgroundSound.pause()
     var backgroundSound = document.createElement('audio')
     backgroundSound.src = 'sound/back.mp3'
@@ -834,7 +837,7 @@ function nnow () {
     fiveCount = false
     computerCAS = []
     playerCAS = 0
-    currentPlayer = 1
+    currentPlayer = 0
     dashCards(5, 0)
     dashCards(5, 1)
     // dashCards(1)
@@ -842,11 +845,108 @@ function nnow () {
     // console.log(computerCAS)
 }
 
-// })
-
-nnow()
-
-
 function quit () {
     window.close()
 }
+
+
+
+let fillData = () => {
+    historys = Store.getPlayer()
+    if (historys == null) {
+        return
+    }
+    for (player of historys) {
+        let option = `<option value="${player.name}">${player.name}</option>`
+        my_name.innerHTML += option
+    }
+}
+
+let scoreSetter = () => {
+    const my_name = names.value
+    let historys = Store.getPlayer()
+    if (historys == null) {
+        historys = []
+    }
+    let index
+    let player
+    for ([index, player] of historys.entries()) {
+        if (player.name == my_name && my_name != '') {
+            return
+        }
+    }
+    Store.setPlayer(my_name)
+}
+
+class Store {
+    static setPlayer (player) {
+        let historys = this.getPlayer()
+        if (historys == null) {
+            historys = []
+        }
+        if (player == '') {
+            return
+        }
+        const new_player = {
+            name: player,
+            comp_score: 0,
+            my_score: 0
+        }
+        historys.push(new_player)
+        historys = JSON.stringify(historys)
+        localStorage.setItem('historys', historys)
+        console.log(historys)
+    }
+
+    static getPlayer () {
+        let historys = localStorage.getItem('historys')
+        historys = JSON.parse(historys)
+        return historys
+    }
+
+    static setBoardHistory () {
+        let historys = Store.getPlayer()
+        if (historys == null) {
+            return
+        }
+        let index
+        let player
+        for ([index, player] of historys.entries()) {
+            let tr = `
+            <tr>
+                <td class="text-white">
+                    <span>${player.name}</span>
+                    ${player.my_score} - ${player.comp_score} Computer
+                    <button type="button" class="btn bg-danger del" id="dee">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+            `
+            let body = document.querySelector('tbody')
+            body.innerHTML += tr
+        }
+    }
+
+    static removePlayer (element) {
+        const my_name = element.document.querySelector('span').innerHTML
+        let historys = Store.getPlayer()
+        let index
+        let player
+        for ([index, player] of historys.entries()) {
+            if (player.name == my_name) {
+                historys = historys.splice(index, 1)
+            }
+        }
+        historys = JSON.stringify(historys)
+        localStorage.setItem(historys)
+    }
+}
+
+function dee(event) {
+    console.log(event)
+}
+
+document.querySelector('#dee').addEventListener('click', alert('ggg'))
+
+fillData()

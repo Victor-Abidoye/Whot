@@ -28,10 +28,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p hidden id="winner" style="color: red;">PLAYER WON!</p>
+                            <p hidden id="winner" style="font-weight: bolder; color: red; text-align: center; font-size: x-large;">PLAYER WON!</p>
                             <div id="myName">
                                 <label for="names">Pick a name</label>
-                                <input type="text" name="player" id="names">
+                                <input list="my_name" name="player" id="names" autofocus>
+                                <datalist id="my_name">
+
+                                </datalist>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -53,7 +56,7 @@
                     <div id="market">
                         <div style="height: 235px; width: 200px; border-radius: 3%; background-color: #521717"
                         class="temp card fas fa-whot twe">
-                            <div class="temp" style="position: relative; top: 20%;">
+                            <div class="temp" style="position: relative; top: 28%;">
                                 <h1 style="color:white" class="ones">whot</h1>
                                 <h1 style="color: white" class="twos">whot</h1>
                             </div>
@@ -87,7 +90,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-white">Victor 1 - 3 Computer</td>
+                                <td class="text-white">
+                                    <span>${player.name}</span>
+                                    ${player.my_score} - ${player.comp_score} Computer
+                                    <button type="button" class="btn bg-danger del" id="dee">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,8 +114,7 @@
         <script src="jquery-3.5.1.min.js"></script>
         <script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        <script src="script.js">
+        <script defer src="script.js"></script>
 
-        </script>
     </body>
 </html>
