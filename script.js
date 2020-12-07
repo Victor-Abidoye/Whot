@@ -587,11 +587,13 @@ function control () {
         $('#staticBackdrop').modal('show')
         winner.hidden = false
         $('#winner').text("Player Won")
+        Store.updateScore(playerName, playerName)
         // load(0)
     } else if (computerCAS.length == 0) {
         $('#staticBackdrop').modal('show')
         $('#winner').text("Computer Won")
         winner.hidden = false
+        Store.updateScore(playerName)
         // load(1)
     } else {
         if (currentPlayer == 0) {
@@ -611,12 +613,12 @@ function control () {
 }
 
 
-var scoreArray = []
-var playerName = names.value
+// var scoreArray = []
+// var playerName = names.value
 
-function load (x) {
-    localStorage.setItem(playerName,)
-}
+// function load (x) {
+//     localStorage.setItem(playerName,)
+// }
 
 var compcard;
 function comp () {
@@ -821,9 +823,10 @@ function compTwenty () {
 }
 
 function nnow () {
+    document.querySelector('tbody').innerHTML = ''
     scoreSetter()
-    // Store.setPlayer(names.value)
     Store.setBoardHistory()
+    setListener()
     // backgroundSound.pause()
     var backgroundSound = document.createElement('audio')
     backgroundSound.src = 'sound/back.mp3'
@@ -862,8 +865,11 @@ let fillData = () => {
     }
 }
 
+let playerName;
+
 let scoreSetter = () => {
     const my_name = names.value
+    playerName = my_name
     let historys = Store.getPlayer()
     if (historys == null) {
         historys = []
@@ -888,12 +894,6 @@ class Store {
         if (player == '') {
             return
         }
-
-        // let index
-        // let player
-        // for ([index, player] of historys.entries()) {
-
-        // }
         const new_player = {
             name: player,
             comp_score: 0,
@@ -919,34 +919,64 @@ class Store {
         let index
         let player
         for ([index, player] of historys.entries()) {
-            let tr = `
-            <tr>
-                <td class="text-white">
-                    <span>${player.name}</span>
-                    ${player.my_score} - ${player.comp_score} Computer
-                    <button type="button" class="btn bg-danger del" id="dee">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </td>
-            </tr>
-            `
+            let my_tr = document.createElement('tr')
+            let my_td = document.createElement('td')
+            let my_p = document.createElement('p')
+            my_p.classList.add("text-white")
+            let my_span = document.createElement('span')
+            my_span.appendChild(document.createTextNode(`${player.name}`))
+            my_p.appendChild(my_span)
+            let my_text = document.createTextNode(` ${player.my_score} - ${player.comp_score} Computer `)
+            my_p.appendChild(my_text)
+            let my_btn = document.createElement('button')
+            my_btn.classList.add("btn", "bg-danger", "del")
+            let my_i = document.createElement('i')
+            my_i.classList.add("far", "fa-trash-alt")
+            my_btn.appendChild(my_i)
+            my_p.appendChild(my_btn)
+            my_td.appendChild(my_p)
+            my_tr.appendChild(my_td)
+
             let body = document.querySelector('tbody')
-            body.innerHTML += tr
+            body.appendChild(my_tr)
         }
     }
 
     static removePlayer (element) {
-        const my_name = element.document.querySelector('span').innerHTML
         let historys = Store.getPlayer()
         let index
         let player
         for ([index, player] of historys.entries()) {
-            if (player.name == my_name) {
-                historys = historys.splice(index, 1)
+            console.log(player.name)
+            if (player.name == element) {
+                console.log(historys)
+                historys.splice(index, 1)
             }
         }
         historys = JSON.stringify(historys)
-        localStorage.setItem(historys)
+        console.log(historys)
+        localStorage.setItem('historys', historys)
+    }
+
+    static updateScore (player, winner) {
+        let historys = Store.getPlayer()
+        let person;
+        for (person of historys) {
+            if (player == person.name) {
+                if (winner == person.name) {
+                    let x = person.my_score
+                    person.my_score = x + 1
+                    alert(person.my_score)
+                } else {
+                    let x = person.comp_score
+                    person.comp_score = x + 1
+                    alert(person.comp_score)
+                }
+            }
+        }
+        console.log(historys)
+        historys = JSON.stringify(historys)
+        localStorage.setItem('historys', historys)
     }
 }
 
@@ -954,6 +984,21 @@ function dee(event) {
     console.log(event)
 }
 
-// document.querySelector('#dee').addEventListener('click', alert('ggg'))
+
+function setListener() {
+    const del = document.querySelectorAll('.del')
+    del.forEach((el) => {
+        el.addEventListener("click", (e) => {
+            Store.removePlayer(e.target.parentElement.parentElement.querySelector('span').innerHTML)
+            console.log(e.target.parentElement.parentElement.querySelector('span').innerHTML)
+            e.target.parentElement.parentElement.querySelector('span').parentElement.parentElement.parentElement.remove()
+
+
+        })
+    })
+}
+
+
+
 
 fillData()
