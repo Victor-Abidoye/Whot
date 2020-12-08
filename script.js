@@ -214,21 +214,31 @@ var availableCard = [
         shape: "whot"
     }
 ]
-
-let myDeck = [...availableCard]
-var twoCount = false
-var fiveCount = false
-var whotShape;
-
-// current player 1 for player, 0 for computer
-var currentPlayer = 1
-
 // Cards already played
 var played = []
-
+// current player 1 for player, 0 for computer
+var currentPlayer = 1
+// keeps record of the card the computer has
 var computerCAS = []
+// keeps count of the number of cards the player has
 var playerCAS = 0
-
+// creaes a copy of the total deck of cards to replaced when playing again
+let myDeck = [...availableCard]
+// twoCount and fiveCount are set to false to show that a 2 or 5 card is not active
+var twoCount = false
+var fiveCount = false
+// Holds the required whot shape by the computer of player
+var whotShape;
+// Holds the player's name
+let playerName;
+// card intended to be played by the computer
+var compcard;
+// storage for the game somg
+var backgroundSound;
+// holds the game song to be played
+var playerHasPlayed = false
+// an array of messages to be displayed
+var mes = ["Player 1's turn", "Computer is playing", "You picked a card", "You Picked ", "You picked ", "Computer picked a card", "computer picked ", "Computer picked ", "General market for you", "LAST CARD", "Computer picked a card"]
 
 // The dashCards functions calls on the pick function 'number' number of times to dash out cards to a particulay player
 function dashCards (number, player) {
@@ -236,7 +246,7 @@ function dashCards (number, player) {
         pick(player)
     }
 }
-
+// allocates a card to the center
 dashCards(1)
 
 // The pick function picks a random card from the availableCard array
@@ -244,10 +254,9 @@ function pick (n) {
     if (availableCard.length == 0) {
         availableCard = played
         played = []
-    } else {
+    }
         var r = Math.floor(Math.random() * availableCard.length)
         render(r, n)
-    }
 }
 
 // The render function takes in the index number of the random generated number and the currentPlayer and display cards for each player
@@ -281,11 +290,9 @@ function render (re, z) {
             shapes = w
         }
 
-
         if (z == 0) {
             x = '#computer'
             computerCAS.push(availableCard[re])
-
             div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
                             <div style="position: relative; top: 28%;">
@@ -326,13 +333,11 @@ function render (re, z) {
             div = `<div id="droppable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
         }
 
-
         if (z == 0) {
             var a = 'ndraggable'
         } else if (z == 1) {
             var a = 'draggable'
         }
-
 
         if (cardNum == 20 && z == 0) {
             div = `<div style="height: 235px; width: 200px; border: 0; position:relative; background-color: white;" class="card ${a} twe">
@@ -359,22 +364,17 @@ function render (re, z) {
                         <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">20</h3>
                     </div>`
         }
-
         $(x).append(div)
-
-
         $('.draggable').draggable({
             revert: true
         })
-
-
         availableCard.splice(re, 1)
     }
 }
+
 $('.draggable').draggable()
 
-var playerHasPlayed = false
-
+// monitors the card to be played by the current player
 $('#droppable').droppable(
     {
         drop: function (event, ui) {
@@ -451,15 +451,15 @@ $('#droppable').droppable(
     }
 )
 
-
-
+// Checks the card to be played with the one on ground
+// Returns true if card can be succesfully played
+// Retruns false if cards don't match
 function dropCheck (p, span) {
     var dropNum = $('#droppable').find('p').text()
     var dropSha = $('#droppable').find('span').text()
     if (dropNum == 2 && twoCount == true) {
         if (p == 2) {
             twoCount = false
-            console.log('pick 2 is cancelled')
             return true
         } else {
             return false
@@ -467,7 +467,6 @@ function dropCheck (p, span) {
     } else if (dropNum == 5 && fiveCount == true) {
         if (p == 5) {
             fiveCount = false
-            console.log('pick 3 is cancelled')
             return true
         } else {
             return false
@@ -491,15 +490,10 @@ function dropCheck (p, span) {
             return false
         }
     } else if (p == dropNum || span == dropSha || p == 20) {
-        console.log('xxx')
         if (p == 2) {
-            console.log('ddd')
             twoCount = true
-            console.log("one")
         } else if (p == 5) {
-            console.log('eee')
             fiveCount = true
-            console.log("two")
         }
         return true
     } else {
@@ -508,6 +502,7 @@ function dropCheck (p, span) {
     }
 }
 
+// Varies the sound for each card action
 function aud (x) {
     var song = document.createElement('audio')
     if (x == 'play') {
@@ -520,11 +515,12 @@ function aud (x) {
     song.play()
 }
 
+// ON dropping a WHOT 20 card, the twenty panel is made visible for shape selection
 function twenty () {
     $('#twenty').css('visibility', 'visible')
-
 }
 
+// Assigns the shape clicked by the player to whotShape
 $('.a').on('click', function () {
     whotShape = $(this).attr('id')
     $('#twenty').css('visibility', 'hidden')
@@ -536,12 +532,12 @@ $('.a').on('click', function () {
     passTurn()
 })
 
+//On click of the market card
 $('#market').on('click', function () {
     if (currentPlayer == 1) {
         if ($('#droppable').find('p').text() == 2 && twoCount == true) {
             aud('pick')
             dashCards(2, 1)
-            // $('h2').text(mes[3] + 2 + ' cards. You can play now')
             twoCount = false
             playerHasPlayed = true
             passTurn()
@@ -560,67 +556,50 @@ $('#market').on('click', function () {
             passTurn()
         }
     }
-
 })
 
+// controls turn pass
 function passTurn () {
-    console.log(computerCAS)
     if (currentPlayer == 1) {
         currentPlayer = 0
         setTimeout(function () {
             control()
         }, 1000)
     } else {
-        // console.log(computerCAS)
-        console.log(computerCAS.length)
-        console.log(playerCAS)
         currentPlayer = 1
         control()
     }
-
 }
 
-var mes = ["Player 1's turn", "Computer is playing", "You picked a card", "You Picked ", "You picked ", "Computer picked a card", "computer picked ", "Computer picked ", "General market for you", "LAST CARD", "Computer picked a card"]
-
+// Checks if there is a winner first else it continues the turn pass
 function control () {
     if (playerCAS == 0) {
         $('#staticBackdrop').modal('show')
         winner.hidden = false
+        backgroundSound.pause()
         $('#winner').text("Player Won")
         Store.updateScore(playerName, playerName)
-        // load(0)
     } else if (computerCAS.length == 0) {
         $('#staticBackdrop').modal('show')
         $('#winner').text("Computer Won")
+        backgroundSound.pause()
         winner.hidden = false
         Store.updateScore(playerName)
-        // load(1)
     } else {
         if (currentPlayer == 0) {
             $('h2').text(mes[1])
             setTimeout(function () {
                 comp()
-                // console.log(computerCAS.length)
             }, 1000)
         } else {
-            // console.log(computerCAS.length)
             setTimeout(function () {
                 $('h2').text(mes[0])
             }, 1000)
         }
     }
-
 }
 
-
-// var scoreArray = []
-// var playerName = names.value
-
-// function load (x) {
-//     localStorage.setItem(playerName,)
-// }
-
-var compcard;
+// Controls the computer's play operation
 function comp () {
     var p = $('#droppable').find('p').text()
     var span = $('#droppable').find('span').text()
@@ -631,22 +610,22 @@ function comp () {
         var presentNum = computerCAS[i]['number']
         var presentSha = computerCAS[i]['shape']
 
-
+        // If any card has the same shape, same number, or it's 20, allow the play of such card
         if (p == presentNum || span == presentSha || presentNum == 20 || (p == 20 && presentSha == whotShape)) {
             x = true
             var y = dropCheck(presentNum, presentSha)
             if (y == true) {
                 $('.ndraggable').each(function () {
-                    // console.log('a')
                     if ($(this).find('p').text() == presentNum && $(this).find('span').text() == presentSha) {
-                        console.log(presentSha, presentNum)
                         compCard = $(this)
+                        // Allow for the spinning of the card before playing
                         document.querySelector(`#${presentSha + presentNum}`).parentElement.classList.add('roll')
                         setTimeout(() => {
                             document.querySelector(`#${presentSha + presentNum}`).previousElementSibling.style.display = 'none'
                             document.querySelector(`#${presentSha + presentNum}`).style.display = ''
                         }, 500)
-                        // compcard.addClass('roll')
+
+                        // Remove the card from the board
                         setTimeout(function () {
                             let twe
                             if (presentNum == 20) {
@@ -656,7 +635,6 @@ function comp () {
                                     tempo.children[counter].style.visibility = 'visible'
                                 }
                             }
-                            // console.log(document.querySelector(`#${presentSha + presentNum}`).nextElementSibling)
 
                             setTimeout(function () {
                                 $('#droppable').html(compCard.html())
@@ -666,9 +644,7 @@ function comp () {
                                     shape: presentSha
                                 }
                                 played.push(obj)
-                                console.log(compCard)
                                 if (presentNum == 20) {
-                                    // let twe = document.querySelectorAll('.twe')
                                     twe[0].remove()
                                 } else {
                                     compCard.css('display', 'none')
@@ -728,14 +704,13 @@ function comp () {
                                     }
                                     passTurn()
                                 }
-
-
                             }, 1000)
                         }, 1000)
                         return false
                     }
                 })
             } else {
+                // If the computer can play this card but there is an active pic 2 or pick 3 card
                 if (p == 2 && twoCount == true) {
                     setTimeout(function () {
                         aud('pick')
@@ -774,6 +749,7 @@ function comp () {
         }
     }
 
+    // If computer has no card to play then it picks 1, 2 or 3 cards accordingly
     if (!x) {
         if (p == 2 && twoCount == true) {
             aud('pick')
@@ -796,7 +772,6 @@ function comp () {
             }, 1000)
 
         } else {
-            console.log('did computer pick a card')
             setTimeout(function () {
                 aud('pick')
                 dashCards(1, currentPlayer)
@@ -810,6 +785,7 @@ function comp () {
     }
 }
 
+// computer picks a random color ager playing a 20
 function compTwenty () {
     var myShape = ['square', 'circle', 'cross', 'triangle', 'star']
     var random = Math.floor(Math.random() * 5)
@@ -818,7 +794,6 @@ function compTwenty () {
         $('h2').text('computer requests ' + whotShape)
         playerHasPlayed = false
         passTurn()
-        // return false
     }, 2000)
 }
 
@@ -827,10 +802,9 @@ function nnow () {
     scoreSetter()
     Store.setBoardHistory()
     setListener()
-    // backgroundSound.pause()
-    var backgroundSound = document.createElement('audio')
+    backgroundSound = document.createElement('audio')
     backgroundSound.src = 'sound/back.mp3'
-    // backgroundSound.play()
+    backgroundSound.play()
     playerHasPlayed = false
     played = []
     availableCard = [...myDeck]
@@ -843,17 +817,14 @@ function nnow () {
     currentPlayer = 0
     dashCards(5, 0)
     dashCards(5, 1)
-    // dashCards(1)
     passTurn()
-    // console.log(computerCAS)
 }
 
 function quit () {
     window.close()
 }
 
-
-
+// Fill in the datalist option, suggested names for previous players
 let fillData = () => {
     historys = Store.getPlayer()
     if (historys == null) {
@@ -865,8 +836,8 @@ let fillData = () => {
     }
 }
 
-let playerName;
 
+// checks for new player and creates a record for the player
 let scoreSetter = () => {
     const my_name = names.value
     playerName = my_name
@@ -877,7 +848,6 @@ let scoreSetter = () => {
     let index
     let player
     for ([index, player] of historys.entries()) {
-        console.log(player)
         if (player.name == my_name || my_name == '') {
             return
         }
@@ -886,6 +856,7 @@ let scoreSetter = () => {
 }
 
 class Store {
+    // Creates a new player object in the storage
     static setPlayer (player) {
         let historys = this.getPlayer()
         if (historys == null) {
@@ -902,15 +873,16 @@ class Store {
         historys.push(new_player)
         historys = JSON.stringify(historys)
         localStorage.setItem('historys', historys)
-        console.log(historys)
     }
 
+    //Gets the array of objects containing all player's history
     static getPlayer () {
         let historys = localStorage.getItem('historys')
         historys = JSON.parse(historys)
         return historys
     }
 
+    // Displays Each Score on the play board
     static setBoardHistory () {
         let historys = Store.getPlayer()
         if (historys == null) {
@@ -942,22 +914,21 @@ class Store {
         }
     }
 
+    // removes a player's record from the localStorage
     static removePlayer (element) {
         let historys = Store.getPlayer()
         let index
         let player
         for ([index, player] of historys.entries()) {
-            console.log(player.name)
             if (player.name == element) {
-                console.log(historys)
                 historys.splice(index, 1)
             }
         }
         historys = JSON.stringify(historys)
-        console.log(historys)
         localStorage.setItem('historys', historys)
     }
 
+    // Updates the new score for winning a game
     static updateScore (player, winner) {
         let historys = Store.getPlayer()
         let person;
@@ -966,39 +937,26 @@ class Store {
                 if (winner == person.name) {
                     let x = person.my_score
                     person.my_score = x + 1
-                    alert(person.my_score)
                 } else {
                     let x = person.comp_score
                     person.comp_score = x + 1
-                    alert(person.comp_score)
                 }
             }
         }
-        console.log(historys)
         historys = JSON.stringify(historys)
         localStorage.setItem('historys', historys)
     }
 }
 
-function dee(event) {
-    console.log(event)
-}
-
-
+// Delete button to remove player's history from Table and localStorage
 function setListener() {
     const del = document.querySelectorAll('.del')
     del.forEach((el) => {
         el.addEventListener("click", (e) => {
             Store.removePlayer(e.target.parentElement.parentElement.querySelector('span').innerHTML)
-            console.log(e.target.parentElement.parentElement.querySelector('span').innerHTML)
             e.target.parentElement.parentElement.querySelector('span').parentElement.parentElement.parentElement.remove()
-
-
         })
     })
 }
-
-
-
 
 fillData()

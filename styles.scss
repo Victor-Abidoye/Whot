@@ -4,7 +4,6 @@ body {
     background-image: url('green.jpg');
 }
 
-
 .top {
     width: 100%;
     height: 50px;
@@ -35,7 +34,6 @@ body {
 #computer {
     margin-bottom: 10px;
     display: flex;
-    // flex-wrap: nowrap;
     div {
         margin: 5px;
     }
@@ -53,38 +51,34 @@ span {
 }
 
 #center {
-        display: flex;
-        p {
-                margin: 0;
-        }
-
+    display: flex;
+    p {
+        margin: 0;
+    }
     #droppable {
-            margin-right: 100px ;
-
-        }
-        #twenty {
-            height: 235px;
-            width: 200px;
-            background-color: wheat;
-            visibility: hidden;
-            margin: 0 70px;
-            // overflow: scroll;
-            display: flex;
-            flex-wrap: wrap;
-
-            .a {
-                height: 45px;
-                width: 60px;
-                margin: 10px;
-                background: white;
-                position: relative;
-                div {
-                    position: absolute;
-                    top: 30%;
-                    left: 30%;
-                }
+        margin-right: 100px ;
+    }
+    #twenty {
+        height: 235px;
+        width: 200px;
+        background-color: wheat;
+        visibility: hidden;
+        margin: 0 70px;
+        display: flex;
+        flex-wrap: wrap;
+        .a {
+            height: 45px;
+            width: 60px;
+            margin: 10px;
+            background: white;
+            position: relative;
+            div {
+                position: absolute;
+                top: 30%;
+                left: 30%;
             }
         }
+    }
 }
 
 #player {
@@ -96,54 +90,54 @@ span {
     P {
         margin: 0;
     }
-
 }
 
 h1 {
     text-align: center;
     color: #521717;
     font-size: 40px;
-    }
+}
 
-    #one {
-        transform: rotateY(180deg) rotateX(180deg);
-        margin: 0;
-        // padding-right: 20px;
-    }
-    #two {
-        margin: 0;
-    }
+#one {
+    transform: rotateY(180deg) rotateX(180deg);
+    margin: 0;
+}
 
-    .card {
-        position: relative;
-    }
-    h4 {
-        color:#521717;
-        margin: 0;
-        padding-left: 10px;
-    }
+#two {
+    margin: 0;
+}
 
-    .ones {
-        transform: rotateY(180deg) rotateX(180deg);
-         padding-right: 20px;
-         margin-bottom: -15px;
-         /* margin-top: 0; */
-    }
-    .twos {
-        margin: 0;
-    }
+.card {
+    position: relative;
+}
 
-    .roll {
-        animation-name: rolling;
-        animation-duration: 2s;
-        animation-fill-mode: forwards;
-    }
+h4 {
+    color:#521717;
+    margin: 0;
+    padding-left: 10px;
+}
 
-    @keyframes rolling {
-        0% {transform: rotateY(180deg);}
-        100% {transform: rotateY(0deg);}
-    }
+.ones {
+    transform: rotateY(180deg) rotateX(180deg);
+    padding-right: 20px;
+    margin-bottom: -15px;
+}
 
-    .del {
-        padding: 0px 6px;
-    }
+.twos {
+    margin: 0;
+}
+
+.roll {
+    animation-name: rolling;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes rolling {
+    0% {transform: rotateY(180deg);}
+    100% {transform: rotateY(0deg);}
+}
+
+.del {
+    padding: 0px 6px;
+}
