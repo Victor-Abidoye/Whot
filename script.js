@@ -269,6 +269,28 @@ function pick (n) {
         render(r, n)
 }
 
+function lock (orientation) {
+    // Go into full screen first
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+    }
+
+    // Then lock orientation
+    screen.orientation.lock(orientation);
+}
+
+if (screen.width < 800) {
+    lock('landscape')
+}
+
+// console.log(document.documentElement.requestFullscreen())
+
 // The render function takes in the index number of the random generated number and the currentPlayer and display cards for each player
 function render (re, z) {
     if (availableCard[re] == undefined) {
