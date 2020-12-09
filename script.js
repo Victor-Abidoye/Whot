@@ -245,6 +245,16 @@ function dashCards (number, player) {
     for (i = 0; i < number; i++) {
         pick(player)
     }
+    // document.querySelectorAll('.draggable').forEach(element => {
+    //     element.addEventListener('click', () => {
+    //         // let draggedNum = element.querySelector('p').innerHTML
+    //         // let draggedSha = element.querySelector('span').innerHTML
+    //         // alert(draggedNum)
+    //         // alert(draggedSha)
+    //         console.log(element)
+    //         alert()
+    //     })
+    // })
 }
 // allocates a card to the center
 dashCards(1)
@@ -365,14 +375,40 @@ function render (re, z) {
                     </div>`
         }
         $(x).append(div)
+
         $('.draggable').draggable({
             revert: true
         })
+
         availableCard.splice(re, 1)
+
+        // Allow click and play for players on mobile
+        if (x == '#player') {
+            let card = document.querySelectorAll('.draggable')
+            card[card.length - 1].addEventListener('click', (e) => {
+                const draggedNum = card[card.length - 1].querySelector('p').innerHTML
+                const draggedSha = card[card.length - 1].querySelector('span').innerHTML
+                const v = dropCheck(draggedNum, draggedSha)
+                if (playerHasPlayed) {
+                    return
+                } if (v == true) {
+                    aud('play')
+                    document.getElementById('droppable').innerHTML = card[card.length - 1].innerHTML
+                    var obj = {
+                        number: draggedNum,
+                        shape: draggedSha
+                    }
+                    played.push(obj)
+                    card[card.length - 1].remove()
+                    playerTest(draggedNum)
+                }
+            })
+        }
     }
 }
 
 $('.draggable').draggable()
+
 
 // monitors the card to be played by the current player
 $('#droppable').droppable(
@@ -394,62 +430,67 @@ $('#droppable').droppable(
                 }
                 played.push(obj)
                 $(ui.draggable).css('display', 'none')
-                if (draggedNum == 2) {
-                    playerHasPlayed = true
-                    playerCAS--
-                    if (playerCAS == 1) {
-                        $('h2').text(mes[9])
-                    }
-                    passTurn()
-                } else if (draggedNum == 5) {
-                    playerHasPlayed = true
-                    playerCAS--
-                    if (playerCAS == 1) {
-                        $('h2').text(mes[9])
-                    }
-                    passTurn()
-                } else if (draggedNum == 14) {
-                    twoCount = false
-                    fiveCount = false
-                    currentPlayer = 0
-                    aud('pick')
-                    dashCards(1, currentPlayer)
-                    $('h2').text(mes[10])
-                    playerHasPlayed = false
-                    playerCAS--
-                    if (playerCAS == 1) {
-                        $('h2').text(mes[9])
-                    }
-                    passTurn()
-                } else if (draggedNum == 8) {
-                    twoCount = false
-                    fiveCount = false
-                    currentPlayer = 0
-                    playerHasPlayed = false
-                    playerCAS--
-                    if (playerCAS == 1) {
-                        $('h2').text(mes[9])
-                    }
-                    passTurn()
-                } else if (draggedNum == 20) {
-                    twoCount = false
-                    fiveCount = false
-                    twenty()
-                } else {
-                    twoCount = false
-                    fiveCount = false
-                    playerHasPlayed = true
-                    playerCAS--
-                    if (playerCAS == 1) {
-                        $('h2').text(mes[9])
-                    }
-                    passTurn()
-                }
 
+                playerTest(draggedNum)
             }
         }
     }
 )
+
+// controls the player actions with the card
+let playerTest = (draggedNum) => {
+    if (draggedNum == 2) {
+        playerHasPlayed = true
+        playerCAS--
+        if (playerCAS == 1) {
+            $('h2').text(mes[9])
+        }
+        passTurn()
+    } else if (draggedNum == 5) {
+        playerHasPlayed = true
+        playerCAS--
+        if (playerCAS == 1) {
+            $('h2').text(mes[9])
+        }
+        passTurn()
+    } else if (draggedNum == 14) {
+        twoCount = false
+        fiveCount = false
+        currentPlayer = 0
+        aud('pick')
+        dashCards(1, currentPlayer)
+        $('h2').text(mes[10])
+        playerHasPlayed = false
+        playerCAS--
+        if (playerCAS == 1) {
+            $('h2').text(mes[9])
+        }
+        passTurn()
+    } else if (draggedNum == 8) {
+        twoCount = false
+        fiveCount = false
+        currentPlayer = 0
+        playerHasPlayed = false
+        playerCAS--
+        if (playerCAS == 1) {
+            $('h2').text(mes[9])
+        }
+        passTurn()
+    } else if (draggedNum == 20) {
+        twoCount = false
+        fiveCount = false
+        twenty()
+    } else {
+        twoCount = false
+        fiveCount = false
+        playerHasPlayed = true
+        playerCAS--
+        if (playerCAS == 1) {
+            $('h2').text(mes[9])
+        }
+        passTurn()
+    }
+}
 
 // Checks the card to be played with the one on ground
 // Returns true if card can be succesfully played
