@@ -98,8 +98,7 @@ h4 {
 .ones {
   transform: rotateY(180deg) rotateX(180deg);
   padding-right: 20px;
-  margin-bottom: -15px;
-  /* margin-top: 0; */ }
+  margin-bottom: -15px; }
 
 .twos {
   margin: 0; }
