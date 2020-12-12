@@ -48,6 +48,14 @@ span {
     margin: 0; }
   #center #droppable {
     margin-right: 100px; }
+  #center #market > div {
+    height: 235px;
+    width: 200px;
+    border-radius: 3%;
+    background-color: #521717; }
+    #center #market > div div {
+      position: relative;
+      top: 28%; }
   #center #twenty {
     height: 235px;
     width: 200px;
@@ -56,16 +64,19 @@ span {
     margin: 0 70px;
     display: flex;
     flex-wrap: wrap; }
-    #center #twenty .a {
+    #center #twenty #circle, #center #twenty #star, #center #twenty #square, #center #twenty #cross, #center #twenty #triangle {
       height: 45px;
       width: 60px;
       margin: 10px;
       background: white;
       position: relative; }
-      #center #twenty .a div {
+      #center #twenty #circle div, #center #twenty #star div, #center #twenty #square div, #center #twenty #cross div, #center #twenty #triangle div {
         position: absolute;
         top: 30%;
         left: 30%; }
+        #center #twenty #circle div i, #center #twenty #star div i, #center #twenty #square div i, #center #twenty #cross div i, #center #twenty #triangle div i {
+          font-size: 20px;
+          color: #521717; }
 
 #player {
   margin-top: 10px;
@@ -75,7 +86,7 @@ span {
   #player P {
     margin: 0; }
 
-h1 {
+p.whot-letter {
   text-align: center;
   color: #521717;
   font-size: 40px; }

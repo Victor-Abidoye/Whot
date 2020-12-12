@@ -232,7 +232,7 @@ var whotShape;
 // Holds the player's name
 let playerName;
 // card intended to be played by the computer
-var compcard;
+var compCard;
 // storage for the game somg
 var backgroundSound;
 // holds the game song to be played
@@ -307,12 +307,13 @@ function render (re, z) {
             div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
                             <div style="position: relative; top: 28%;">
-                                <h1 style="color:white" class="ones">whot</h1>
-                                <h1 style="color: white" class="twos">whot</h1>
+                                <p style="color:white" class="ones whot-letter">whot</p>
+                                <p style="color: white" class="twos whot-letter">whot</p>
                             </div>
                         </div>
                         <div id="${cardShape + cardNum}" style="display: none;">
-                            <p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span
+                        <p></p>
+                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; class="num">${cardNum}</p><span
                                 style="visibility: hidden;">${cardShape}</span>
                             <div style="position: absolute; top: 33px; left: 7px; "> <i class="${shapes}"
                                     style="font-size: 20px; color:#521717;"></i></div>
@@ -328,8 +329,8 @@ function render (re, z) {
         } else if (z == 1) {
             x = '#player'
             playerCAS++
-            div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
-                <p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
+            div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><p></p><p></p><p></p>
+                <p style="color:#521717; font-weight: bolder; font-size: xx-large; class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
                 <div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div>
                 <div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div>
                 <div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div>
@@ -341,7 +342,8 @@ function render (re, z) {
                 return
             }
             x = '#middle'
-            div = `<div id="droppable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><p style="color:#521717; font-weight: bolder; font-size: xx-large;">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
+            div = `<div id="droppable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
+            <p></p><p></p><p></p><p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
         }
 
         if (z == 0) {
@@ -354,23 +356,25 @@ function render (re, z) {
             div = `<div style="height: 235px; width: 200px; border: 0; position:relative; background-color: white;" class="card ${a} twe">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
                             <div style="position: relative; top: 28%;">
-                                <h1 style="color:white" class="ones">whot</h1>
-                                <h1 style="color: white" class="twos">whot</h1>
+                                <p style="color:white" class="ones whot-letter">whot</p>
+                                <p style="color: white" class="twos whot-letter">whot</p>
                             </div>
                         </div>
                         <div id="${cardShape + cardNum}" style="display: none;">
-                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0;">20</p>
+                        <p></p>
+                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0; class="num">20</p>
                             <h4 style="margin-bottom: 0;">W <span style="color: white;">${cardShape}</span></h4>
-                            <h1 id="one">whot</h1><h1 id="two">whot</h1>
+                            <p id="one" class="whot-letter">whot</p><p class="whot-letter" id="two">whot</p>
                             <div style="position: absolute; bottom: 32px; right: 12px;"> <h4>W</h4></div>
                             <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">20</h3>
                         </div>
                     </div>`
         } else if (cardNum == 20 && z == 1) {
             div = `<div style="height: 235px; width: 200px; background-color: white;" class="card ${a} twe">
-                        <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0;">20</p>
+            <p></p><p></p><p></p>
+                        <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0; class"num">20</p>
                         <h4 style="margin-bottom: 0;">W <span style="color: white;">${cardShape}</span></h4>
-                        <h1 id="one">whot</h1><h1 id="two">whot</h1>
+                        <p id="one" class="whot-letter">whot</p><p class="whot-letter" id="two">whot</p>
                         <div style="position: absolute; bottom: 32px; right: 12px;"> <h4>W</h4></div>
                         <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">20</h3>
                     </div>`
@@ -387,7 +391,7 @@ function render (re, z) {
         if (x == '#player') {
             let card = document.querySelectorAll('.draggable')
             card[card.length - 1].addEventListener('click', (e) => {
-                const draggedNum = card[card.length - 1].querySelector('p').innerHTML
+                const draggedNum = card[card.length - 1].querySelectorAll('p')[3].innerHTML
                 const draggedSha = card[card.length - 1].querySelector('span').innerHTML
                 const v = dropCheck(draggedNum, draggedSha)
                 if (playerHasPlayed) {
@@ -418,6 +422,7 @@ $('#droppable').droppable(
             var draggedNum = $(ui.draggable).find('p').text()
             var draggedSha = $(ui.draggable).find('span').text()
             var v = dropCheck(draggedNum, draggedSha)
+            console.log(draggedNum)
             if (playerHasPlayed) {
                 return
             }
@@ -497,8 +502,10 @@ let playerTest = (draggedNum) => {
 // Returns true if card can be succesfully played
 // Retruns false if cards don't match
 function dropCheck (p, span) {
-    var dropNum = $('#droppable').find('p').text()
+    // var dropNum = $('#droppable').find('.num').text()
+    var dropNum = document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML
     var dropSha = $('#droppable').find('span').text()
+    console.log(dropNum)
     if (dropNum == 2 && twoCount == true) {
         if (p == 2) {
             twoCount = false
@@ -577,13 +584,13 @@ $('.a').on('click', function () {
 //On click of the market card
 $('#market').on('click', function () {
     if (currentPlayer == 1) {
-        if ($('#droppable').find('p').text() == 2 && twoCount == true) {
+        if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 2 && twoCount == true) {
             aud('pick')
             dashCards(2, 1)
             twoCount = false
             playerHasPlayed = true
             passTurn()
-        } else if ($('#droppable').find('p').text() == 5 && fiveCount == true) {
+        } else if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 5 && fiveCount == true) {
             aud('pick')
             dashCards(3, 1)
             $('h2').text(mes[4] + 3 + ' cards. You can play now')
@@ -643,9 +650,10 @@ function control () {
 
 // Controls the computer's play operation
 function comp () {
-    var p = $('#droppable').find('p').text()
+    // var p = $('#droppable').find('p').text()
+    var p = document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML
     var span = $('#droppable').find('span').text()
-
+    console.log(p)
     var x = false
 
     for (let i = 0; i < computerCAS.length; i++) {
@@ -657,9 +665,23 @@ function comp () {
             x = true
             var y = dropCheck(presentNum, presentSha)
             if (y == true) {
-                $('.ndraggable').each(function () {
-                    if ($(this).find('p').text() == presentNum && $(this).find('span').text() == presentSha) {
-                        compCard = $(this)
+                console.log("here")
+                document.querySelectorAll(".ndraggable").forEach((element) => {
+                    console.log(element.querySelectorAll("p")[2])
+
+                })
+
+
+                document.querySelectorAll(".ndraggable").forEach((element) => {
+                    if (element.querySelectorAll("p")[3].innerHTML == presentNum && element.querySelector("span").innerHTML == presentSha) {
+                // })
+
+                // $('.ndraggable').each(function () {
+                //     if ($(this).find('.num').text() == presentNum && $(this).find('span').text() == presentSha) {
+                        // compCard = $(this)
+                        console.log(element)
+                        compCard = element
+                        console.log(compCard)
                         // Allow for the spinning of the card before playing
                         document.querySelector(`#${presentSha + presentNum}`).parentElement.classList.add('roll')
                         setTimeout(() => {
@@ -679,7 +701,7 @@ function comp () {
                             }
 
                             setTimeout(function () {
-                                $('#droppable').html(compCard.html())
+                                $('#droppable').html(compCard.innerHTML)
                                 aud('play')
                                 var obj = {
                                     number: presentNum,
@@ -689,7 +711,8 @@ function comp () {
                                 if (presentNum == 20) {
                                     twe[0].remove()
                                 } else {
-                                    compCard.css('display', 'none')
+                                    // compCard.css('display', 'none')
+                                    compCard.style.display = 'none'
                                 }
                                 if (presentNum == 2) {
                                     playerHasPlayed = false

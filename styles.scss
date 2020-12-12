@@ -58,6 +58,18 @@ span {
     #droppable {
         margin-right: 100px ;
     }
+
+    #market > div {
+        height: 235px;
+        width: 200px;
+        border-radius: 3%;
+        background-color: #521717;
+        div {
+            position: relative;
+            top: 28%;
+        }
+    }
+
     #twenty {
         height: 235px;
         width: 200px;
@@ -66,7 +78,7 @@ span {
         margin: 0 70px;
         display: flex;
         flex-wrap: wrap;
-        .a {
+        #circle, #star, #square, #cross, #triangle {
             height: 45px;
             width: 60px;
             margin: 10px;
@@ -76,6 +88,10 @@ span {
                 position: absolute;
                 top: 30%;
                 left: 30%;
+                i {
+                    font-size: 20px;
+                    color:#521717;
+                }
             }
         }
     }
@@ -92,7 +108,7 @@ span {
     }
 }
 
-h1 {
+p.whot-letter {
     text-align: center;
     color: #521717;
     font-size: 40px;

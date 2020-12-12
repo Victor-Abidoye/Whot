@@ -17,30 +17,30 @@
             <div class="row">
                 <div class="col-10" style="padding: 0;">
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Do you want to play</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="quit()">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p hidden id="winner" style="font-weight: bolder; color: red; text-align: center; font-size: x-large;">PLAYER WON!</p>
-                            <div id="myName">
-                                <label for="names">Pick a name</label>
-                                <input list="my_name" name="player" id="names" autofocus>
-                                <datalist id="my_name">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Do you want to play</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="quit()">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p hidden id="winner" style="font-weight: bolder; color: red; text-align: center; font-size: x-large;">PLAYER WON!</p>
+                                    <div id="myName">
+                                        <label for="names">Pick a name</label>
+                                        <input list="my_name" name="player" id="names" autofocus>
+                                        <datalist id="my_name">
 
-                                </datalist>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="nnow()">Play</button>
+                                    <button type="button" class="btn btn-danger" onclick="quit()">Quit</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="nnow()">Play</button>
-                            <button type="button" class="btn btn-danger" onclick="quit()">Quit</button>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                     <div class="top">
                         <p><h2>Player 1's turn</h2></p>
@@ -52,20 +52,20 @@
 
                     <div id="center" class="clearfix">
                         <div id="market">
-                            <div style="height: 235px; width: 200px; border-radius: 3%; background-color: #521717"
+                            <div
                             class="temp card fas fa-whot twe">
-                                <div class="temp" style="position: relative; top: 28%;">
-                                    <h1 style="color:white" class="ones">whot</h1>
-                                    <h1 style="color: white" class="twos">whot</h1>
+                                <div class="temp" >
+                                    <p style="color:white" class="ones whot-letter">whot</p>
+                                    <p style="color: white" class="twos whot-letter">whot</p>
                                 </div>
                             </div>
                         </div>
                         <div id="twenty">
-                            <div id="square"><div><i class="fas fa-square" style="font-size: 20px; color:#521717;  "></i></div></div>
-                            <div id="star"><div><i class="fas fa-star" style="font-size: 20px; color:#521717;  "></i></div></div>
-                            <div id="circle"><div><i class="fas fa-circle" style="font-size: 20px; color:#521717;  "></i></div></div>
-                            <div id="cross"><div><i class="fas fa-cross" style="font-size: 20px; color:#521717;  "></i></div></div>
-                            <div id="triangle"><div><i class="fas fa-play" style="font-size: 20px; color:#521717;  "></i></div></div>
+                            <div id="square"><div><i class="fas fa-square" ></i></div></div>
+                            <div id="star"><div><i class="fas fa-star" ></i></div></div>
+                            <div id="circle"><div><i class="fas fa-circle" ></i></div></div>
+                            <div id="cross"><div><i class="fas fa-cross" ></i></div></div>
+                            <div id="triangle"><div><i class="fas fa-play" ></i></div></div>
                         </div>
 
                         <div id="middle">
