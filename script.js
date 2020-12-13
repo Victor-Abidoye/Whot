@@ -1,174 +1,174 @@
 $('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
-    {
-        number: 1,
-        shape: "circle"
-    },
-    {
-        number: 1,
-        shape: "triangle"
-    },
-    {
-        number: 1,
-        shape: "cross"
-    },
-    {
-        number: 1,
-        shape: "square"
-    },
-    {
-        number: 1,
-        shape: "star"
-    },
-    {
-        number: 2,
-        shape: "circle"
-    },
-    {
-        number: 2,
-        shape: "triangle"
-    },
-    {
-        number: 2,
-        shape: "cross"
-    },
-    {
-        number: 2,
-        shape: "square"
-    },
-    {
-        number: 2,
-        shape: "star"
-    },
-    {
-        number: 3,
-        shape: "circle"
-    },
-    {
-        number: 3,
-        shape: "triangle"
-    },
-    {
-        number: 3,
-        shape: "cross"
-    },
-    {
-        number: 3,
-        shape: "square"
-    },
-    {
-        number: 3,
-        shape: "star"
-    },
-    {
-        number: 4,
-        shape: "circle"
-    },
-    {
-        number: 4,
-        shape: "triangle"
-    },
-    {
-        number: 4,
-        shape: "star"
-    },
-    {
-        number: 5,
-        shape: "circle"
-    },
-    {
-        number: 5,
-        shape: "triangle"
-    },
-    {
-        number: 5,
-        shape: "cross"
-    },
-    {
-        number: 5,
-        shape: "square"
-    },
-    {
-        number: 5,
-        shape: "star"
-    },
-    {
-        number: 7,
-        shape: "circle"
-    },
-    {
-        number: 7,
-        shape: "triangle"
-    },
-    {
-        number: 7,
-        shape: "cross"
-    },
-    {
-        number: 7,
-        shape: "square"
-    },
-    {
-        number: 7,
-        shape: "star"
-    },
-    {
-        number: 8,
-        shape: "circle"
-    },
-    {
-        number: 8,
-        shape: "triangle"
-    },
-    {
-        number: 8,
-        shape: "star"
-    },
-    {
-        number: 10,
-        shape: "circle"
-    },
-    {
-        number: 10,
-        shape: "triangle"
-    },
-    {
-        number: 10,
-        shape: "cross"
-    },
-    {
-        number: 10,
-        shape: "square"
-    },
-    {
-        number: 11,
-        shape: "circle"
-    },
-    {
-        number: 11,
-        shape: "triangle"
-    },
-    {
-        number: 11,
-        shape: "cross"
-    },
-    {
-        number: 11,
-        shape: "square"
-    },
-    {
-        number: 12,
-        shape: "circle"
-    },
-    {
-        number: 12,
-        shape: "triangle"
-    },
-    {
-        number: 13,
-        shape: "circle"
-    },
+    // {
+    //     number: 1,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 1,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 1,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 1,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 1,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 2,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 2,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 2,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 2,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 2,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 3,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 3,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 3,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 3,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 3,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 4,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 4,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 4,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 5,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 5,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 5,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 5,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 5,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 7,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 7,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 7,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 7,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 7,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 8,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 8,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 8,
+    //     shape: "star"
+    // },
+    // {
+    //     number: 10,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 10,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 10,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 10,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 11,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 11,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 11,
+    //     shape: "cross"
+    // },
+    // {
+    //     number: 11,
+    //     shape: "square"
+    // },
+    // {
+    //     number: 12,
+    //     shape: "circle"
+    // },
+    // {
+    //     number: 12,
+    //     shape: "triangle"
+    // },
+    // {
+    //     number: 13,
+    //     shape: "circle"
+    // },
     {
         number: 13,
         shape: "triangle"
@@ -330,7 +330,7 @@ function render (re, z) {
             x = '#player'
             playerCAS++
             div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;"><p></p><p></p><p></p>
-                <p style="color:#521717; font-weight: bolder; font-size: xx-large; class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
+                <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
                 <div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div>
                 <div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div>
                 <div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div>
@@ -372,7 +372,7 @@ function render (re, z) {
         } else if (cardNum == 20 && z == 1) {
             div = `<div style="height: 235px; width: 200px; background-color: white;" class="card ${a} twe">
             <p></p><p></p><p></p>
-                        <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0; class"num">20</p>
+                        <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0;" class="num">20</p>
                         <h4 style="margin-bottom: 0;">W <span style="color: white;">${cardShape}</span></h4>
                         <p id="one" class="whot-letter">whot</p><p class="whot-letter" id="two">whot</p>
                         <div style="position: absolute; bottom: 32px; right: 12px;"> <h4>W</h4></div>
@@ -419,7 +419,7 @@ $('.draggable').draggable()
 $('#droppable').droppable(
     {
         drop: function (event, ui) {
-            var draggedNum = $(ui.draggable).find('p').text()
+            var draggedNum = $(ui.draggable).find('p.num').text()
             var draggedSha = $(ui.draggable).find('span').text()
             var v = dropCheck(draggedNum, draggedSha)
             console.log(draggedNum)
@@ -570,7 +570,7 @@ function twenty () {
 }
 
 // Assigns the shape clicked by the player to whotShape
-$('.a').on('click', function () {
+$('.twentyShape').on('click', function () {
     whotShape = $(this).attr('id')
     $('#twenty').css('visibility', 'hidden')
     playerHasPlayed = true
@@ -665,27 +665,26 @@ function comp () {
             x = true
             var y = dropCheck(presentNum, presentSha)
             if (y == true) {
-                console.log("here")
-                document.querySelectorAll(".ndraggable").forEach((element) => {
-                    console.log(element.querySelectorAll("p")[2])
+                let ndraggable = document.querySelectorAll(".ndraggable")
+                for (i = 0; i < ndraggable.length; i++) {
+                    if (ndraggable[i].querySelectorAll("p")[3].innerHTML == presentNum && ndraggable[i].querySelector("span").innerHTML == presentSha) {
 
-                })
-
-
-                document.querySelectorAll(".ndraggable").forEach((element) => {
-                    if (element.querySelectorAll("p")[3].innerHTML == presentNum && element.querySelector("span").innerHTML == presentSha) {
+                //     }
+                // }
+                // document.querySelectorAll(".ndraggable").forEach((element) => {
+                //     if (element.querySelectorAll("p")[3].innerHTML == presentNum && element.querySelector("span").innerHTML == presentSha) {
                 // })
 
                 // $('.ndraggable').each(function () {
                 //     if ($(this).find('.num').text() == presentNum && $(this).find('span').text() == presentSha) {
                         // compCard = $(this)
-                        console.log(element)
-                        compCard = element
+                        compCard = ndraggable[i]
                         console.log(compCard)
                         // Allow for the spinning of the card before playing
                         document.querySelector(`#${presentSha + presentNum}`).parentElement.classList.add('roll')
                         setTimeout(() => {
                             document.querySelector(`#${presentSha + presentNum}`).previousElementSibling.style.display = 'none'
+                            console.log(document.querySelector(`#${presentSha + presentNum}`))
                             document.querySelector(`#${presentSha + presentNum}`).style.display = ''
                         }, 500)
 
@@ -771,9 +770,12 @@ function comp () {
                                 }
                             }, 1000)
                         }, 1000)
-                        return false
+                        break
+                        // return false
                     }
-                })
+                }
+                // )
+                break
             } else {
                 // If the computer can play this card but there is an active pic 2 or pick 3 card
                 if (p == 2 && twoCount == true) {
@@ -858,6 +860,7 @@ function compTwenty () {
     setTimeout(function () {
         $('h2').text('computer requests ' + whotShape)
         playerHasPlayed = false
+        console.log(currentPlayer)
         passTurn()
     }, 2000)
 }
@@ -869,7 +872,7 @@ function nnow () {
     setListener()
     backgroundSound = document.createElement('audio')
     backgroundSound.src = 'sound/back.mp3'
-    backgroundSound.play()
+    // backgroundSound.play()
     playerHasPlayed = false
     played = []
     availableCard = [...myDeck]
@@ -883,6 +886,7 @@ function nnow () {
     dashCards(5, 0)
     dashCards(5, 1)
     passTurn()
+    console.log(computerCAS)
 }
 
 function quit () {
