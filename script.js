@@ -1,4 +1,4 @@
-$('#staticBackdrop').modal('show')
+// $('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
     {
@@ -225,7 +225,7 @@ var playerCAS = 0
 // creaes a copy of the total deck of cards to replaced when playing again
 let myDeck = [...availableCard]
 // twoCount and fiveCount are set to false to show that a 2 or 5 card is not active
-var twoCount = false
+// var twoCount = false
 var fiveCount = false
 // Holds the required whot shape by the computer of player
 var whotShape;
@@ -302,8 +302,7 @@ function render (re, z) {
                             </div>
                         </div>
                         <div id="${cardShape + cardNum}" style="display: none;">
-                        <p></p>
-                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; class="num">${cardNum}</p><span
+                            <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span
                                 style="visibility: hidden;">${cardShape}</span>
                             <div style="position: absolute; top: 33px; left: 7px; "> <i class="${shapes}"
                                     style="font-size: 20px; color:#521717;"></i></div>
@@ -319,9 +318,10 @@ function render (re, z) {
         } else if (z == 1) {
             x = '#player'
             playerCAS++
-            div = `<div class="draggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%; overflow: hidden;"><p></p><p></p><p></p>
-                <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span>
-                <div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div>
+            div = `<div class="draggable my_draggable">
+                <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p>
+                <span style="visibility: hidden;">${cardShape}</span>
+                <div style="position: absolute; top: 40px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div>
                 <div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div>
                 <div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div>
                 <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3>
@@ -333,7 +333,7 @@ function render (re, z) {
             }
             x = '#middle'
             div = `<div id="droppable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
-            <p></p><p></p><p></p><p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
+            <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
         }
 
         if (z == 0) {
@@ -352,7 +352,7 @@ function render (re, z) {
                         </div>
                         <div id="${cardShape + cardNum}" style="display: none;">
                         <p></p>
-                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0; class="num">20</p>
+                            <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0;" class="num">20</p>
                             <h4 style="margin-bottom: 0;">W <span style="color: white;">${cardShape}</span></h4>
                             <p id="one" class="whot-letter">whot</p><p class="whot-letter" id="two">whot</p>
                             <div style="position: absolute; bottom: 32px; right: 12px;"> <h4>W</h4></div>
@@ -360,11 +360,10 @@ function render (re, z) {
                         </div>
                     </div>`
         } else if (cardNum == 20 && z == 1) {
-            div = `<div style="height: 235px; width: 200px; background-color: white; overflow: hidden;" class="card ${a} twe">
-            <p></p><p></p><p></p>
+            div = `<div class="card ${a} my_draggable twe">
                         <p style="color:#521717; font-weight: bolder; font-size: xx-large; margin-bottom: 0;" class="num">20</p>
                         <h4 style="margin-bottom: 0;">W <span style="color: white;">${cardShape}</span></h4>
-                        <p id="one" class="whot-letter">whot</p><p class="whot-letter" id="two">whot</p>
+                        <p id="one" class="whot-letter" >whot</p><p class="whot-letter" id="two" >whot</p>
                         <div style="position: absolute; bottom: 32px; right: 12px;"> <h4>W</h4></div>
                         <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">20</h3>
                     </div>`
@@ -381,7 +380,7 @@ function render (re, z) {
         if (x == '#player') {
             let card = document.querySelectorAll('.draggable')
             card[card.length - 1].addEventListener('click', (e) => {
-                const draggedNum = card[card.length - 1].querySelectorAll('p')[3].innerHTML
+                const draggedNum = card[card.length - 1].querySelectorAll('.num')[0].innerHTML
                 const draggedSha = card[card.length - 1].querySelector('span').innerHTML
                 const v = dropCheck(draggedNum, draggedSha)
                 if (playerHasPlayed) {
@@ -398,6 +397,17 @@ function render (re, z) {
                     playerTest(draggedNum)
                 }
             })
+        }
+
+        if (playerCAS > 8) {
+            let spacer = playerCAS - 2
+            player.style.width = 100 + (spacer * 7) + "%";
+           scroller.style.overflowX = "scroll"
+        }
+        else {
+            player.style.width = "100%"
+            // scroller.style.overflowX = "none"
+
         }
     }
 }
@@ -436,7 +446,10 @@ $('#droppable').droppable(
 // controls the player actions with the card
 let playerTest = (draggedNum) => {
     if (draggedNum == 2) {
-        playerHasPlayed = true
+        // playerHasPlayed = true
+        currentPlayer = 0
+        dashCards(2, 0)
+        $('h2').text(mes[6] + 2 + ' cards')
         playerCAS--
         if (playerCAS == 1) {
             $('h2').text(mes[9])
@@ -450,7 +463,7 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 14) {
-        twoCount = false
+        // twoCount = false
         fiveCount = false
         currentPlayer = 0
         aud('pick')
@@ -463,7 +476,7 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 8) {
-        twoCount = false
+        // twoCount = false
         fiveCount = false
         currentPlayer = 0
         playerHasPlayed = false
@@ -473,11 +486,11 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 20) {
-        twoCount = false
+        // twoCount = false
         fiveCount = false
         twenty()
     } else {
-        twoCount = false
+        // twoCount = false
         fiveCount = false
         playerHasPlayed = true
         playerCAS--
@@ -493,17 +506,18 @@ let playerTest = (draggedNum) => {
 // Retruns false if cards don't match
 function dropCheck (p, span) {
     // var dropNum = $('#droppable').find('.num').text()
-    var dropNum = document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML
+    var dropNum = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var dropSha = $('#droppable').find('span').text()
     console.log(dropNum)
-    if (dropNum == 2 && twoCount == true) {
-        if (p == 2) {
-            twoCount = false
-            return true
-        } else {
-            return false
-        }
-    } else if (dropNum == 5 && fiveCount == true) {
+    // if (dropNum == 2 && twoCount == true) {
+    //     if (p == 2) {
+    //         twoCount = false
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // } else
+        if (dropNum == 5 && fiveCount == true) {
         if (p == 5) {
             fiveCount = false
             return true
@@ -514,10 +528,11 @@ function dropCheck (p, span) {
         return true
     } else if (dropNum == 20) {
         if (p == 20 || span == whotShape) {
-            if (p == 2) {
-                twoCount = true
-                return true
-            } else if (p == 5) {
+            // if (p == 2) {
+            //     twoCount = true
+            //     return true
+            // } else
+                if (p == 5) {
                 fiveCount = true
                 return true
             } if (p == 20) {
@@ -528,9 +543,10 @@ function dropCheck (p, span) {
             return false
         }
     } else if (p == dropNum || span == dropSha || p == 20) {
-        if (p == 2) {
-            twoCount = true
-        } else if (p == 5) {
+        // if (p == 2) {
+        //     twoCount = true
+        // } else
+        if (p == 5) {
             fiveCount = true
         }
         return true
@@ -573,13 +589,14 @@ $('.twentyShape').on('click', function () {
 //On click of the market card
 $('#market').on('click', function () {
     if (currentPlayer == 1) {
-        if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 2 && twoCount == true) {
-            aud('pick')
-            dashCards(2, 1)
-            twoCount = false
-            playerHasPlayed = true
-            passTurn()
-        } else if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 5 && fiveCount == true) {
+        // if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 2 && twoCount == true) {
+        //     aud('pick')
+        //     dashCards(2, 1)
+        //     twoCount = false
+        //     playerHasPlayed = true
+        //     passTurn()
+        // } else
+            if (document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML == 5 && fiveCount == true) {
             aud('pick')
             dashCards(3, 1)
             $('h2').text(mes[4] + 3 + ' cards. You can play now')
@@ -598,6 +615,12 @@ $('#market').on('click', function () {
 
 // controls turn pass
 function passTurn (whot) {
+    if (playerCAS > 8) {
+        scroller.style.overflowX = "scroll"
+    } else {
+        player.style.width = "100%"
+        // scroller.style.overflowX = "none"
+    }
     if (currentPlayer == 1) {
         currentPlayer = 0
         setTimeout(function () {
@@ -644,7 +667,7 @@ function control (whot) {
 // Controls the computer's play operation
 function comp () {
     // var p = $('#droppable').find('p').text()
-    var p = document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML
+    var p = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var span = $('#droppable').find('span').text()
     console.log(p)
     var x = false
@@ -660,7 +683,8 @@ function comp () {
             if (y == true) {
                 let ndraggable = document.querySelectorAll(".ndraggable")
                 for (j = 0; j < ndraggable.length; j++) {
-                    if (ndraggable[j].querySelectorAll("p")[3].innerHTML == presentNum && ndraggable[j].querySelector("span").innerHTML == presentSha) {
+                    console.log(ndraggable[j].querySelectorAll('p'))
+                    if (ndraggable[j].querySelectorAll(".num")[0].innerHTML == presentNum && ndraggable[j].querySelector("span").innerHTML == presentSha) {
                         compCard = ndraggable[j]
 
                         // Allow for the spinning of the card before playing
@@ -696,8 +720,12 @@ function comp () {
                                     // compCard.css('display', 'none')
                                     compCard.style.display = 'none'
                                 }
+
                                 if (presentNum == 2) {
-                                    playerHasPlayed = false
+                                    dashCards(2, 1)
+                                    $('h2').text('Player picked 2 cards')
+                                    currentPlayer = 1
+                                    playerHasPlayed = true
                                     computerCAS.splice(i, 1)
                                     if (computerCAS.length == 1) {
                                         $('h2').text(mes[9])
@@ -711,7 +739,7 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 14) {
-                                    twoCount = false
+                                    // twoCount = false
                                     fiveCount = false
                                     currentPlayer = 1
                                     aud('pick')
@@ -724,7 +752,7 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 8) {
-                                    twoCount = false
+                                    // twoCount = false
                                     fiveCount = false
                                     currentPlayer = 1
                                     playerHasPlayed = false
@@ -734,7 +762,7 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 20) {
-                                    twoCount = false
+                                    // twoCount = false
                                     fiveCount = false
                                     computerCAS.splice(i, 1)
                                     if (computerCAS.length == 1) {
@@ -742,7 +770,7 @@ function comp () {
                                     }
                                     compTwenty()
                                 } else {
-                                    twoCount = false
+                                    // twoCount = false
                                     fiveCount = false
                                     playerHasPlayed = false
                                     computerCAS.splice(i, 1)
@@ -760,18 +788,19 @@ function comp () {
                 break
             } else {
                 // If the computer can play this card but there is an active pic 2 or pick 3 card
-                if (p == 2 && twoCount == true) {
-                    setTimeout(function () {
-                        aud('pick')
-                        dashCards(2, currentPlayer)
-                        $('h2').text(mes[6] + 2 + ' cards')
-                        setTimeout(function () {
-                            twoCount = false
-                            playerHasPlayed = false
-                            passTurn()
-                        }, 1000)
-                    }, 1000)
-                } else if (p == 5 && fiveCount == true) {
+                // if (p == 2 && twoCount == true) {
+                //     setTimeout(function () {
+                //         aud('pick')
+                //         dashCards(2, currentPlayer)
+                //         $('h2').text(mes[6] + 2 + ' cards')
+                //         setTimeout(function () {
+                //             twoCount = false
+                //             playerHasPlayed = false
+                //             passTurn()
+                //         }, 1000)
+                //     }, 1000)
+                // } else
+                    if (p == 5 && fiveCount == true) {
                     setTimeout(function () {
                         aud('pick')
                         dashCards(3, currentPlayer)
@@ -800,17 +829,18 @@ function comp () {
 
     // If computer has no card to play then it picks 1, 2 or 3 cards accordingly
     if (!x) {
-        if (p == 2 && twoCount == true) {
-            aud('pick')
-            dashCards(2, currentPlayer)
-            $('h2').text(mes[6] + 2 + ' cards')
-            setTimeout(function () {
-                twoCount = false
-                playerHasPlayed = false
-                passTurn()
-            }, 1000)
+        // if (p == 2 && twoCount == true) {
+        //     aud('pick')
+        //     dashCards(2, currentPlayer)
+        //     $('h2').text(mes[6] + 2 + ' cards')
+        //     setTimeout(function () {
+        //         twoCount = false
+        //         playerHasPlayed = false
+        //         passTurn()
+        //     }, 1000)
 
-        } else if (p == 5 && fiveCount == true) {
+        // } else
+            if (p == 5 && fiveCount == true) {
             aud('pick')
             dashCards(3, currentPlayer)
             $('h2').text(mes[7] + 3 + ' cards')
@@ -853,29 +883,7 @@ function compTwenty () {
     }, 2000)
 }
 
-function nnow () {
-    document.querySelector('tbody').innerHTML = ''
-    scoreSetter()
-    Store.setBoardHistory()
-    setListener()
-    backgroundSound = document.createElement('audio')
-    backgroundSound.src = 'sound/back.mp3'
-    // backgroundSound.play()
-    playerHasPlayed = false
-    played = []
-    availableCard = [...myDeck]
-    $('#computer').html('')
-    $('#player').html('')
-    twoCount = false
-    fiveCount = false
-    computerCAS = []
-    playerCAS = 0
-    currentPlayer = 0
-    dashCards(5, 0)
-    dashCards(5, 1)
-    passTurn()
-    console.log(computerCAS)
-}
+
 
 function quit () {
     window.close()
@@ -1015,5 +1023,29 @@ function setListener() {
         })
     })
 }
+function nnow () {
+    document.querySelector('tbody').innerHTML = ''
+    scoreSetter()
+    Store.setBoardHistory()
+    setListener()
+    backgroundSound = document.createElement('audio')
+    backgroundSound.src = 'sound/back.mp3'
+    // backgroundSound.play()
+    playerHasPlayed = false
+    played = []
+    availableCard = [...myDeck]
+    $('#computer').html('')
+    $('#player').html('')
+    // twoCount = false
+    fiveCount = false
+    computerCAS = []
+    playerCAS = 0
+    currentPlayer = 0
+    dashCards(5, 0)
+    dashCards(5, 1)
+    passTurn()
+    console.log(computerCAS)
+}
+nnow()
 
 fillData()

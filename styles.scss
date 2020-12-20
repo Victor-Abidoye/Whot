@@ -8,8 +8,6 @@ body {
     height: 235px;
     width: 200px;
     background-color: maroon;
-    // position: fixed;
-    // bottom: 0;
     z-index: 1;
     p {
         margin: 0;
@@ -32,10 +30,18 @@ body {
 }
 
 #computer {
-    margin-bottom: 10px;
     display: flex;
-    div {
-        margin: 5px;
+    .ndraggable {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 4px 4px 12px 2px;
+        height: 235px;
+        width: 200px;
+        background-color: white;
+        overflow: hidden;
+    }
+    .ndraggable:not(:first-child){
+        margin-left: -4rem;
     }
 }
 
@@ -52,7 +58,7 @@ span {
 
 #center {
     display: flex;
-    margin-top: 30px;
+    margin-bottom: 30px;
     p {
         margin: 0;
     }
@@ -99,16 +105,28 @@ span {
 }
 
 #player {
-    // margin-top: 10px;
     display: flex;
-    position: fixed;
-    bottom: 0;
-    div {
-        margin: 5px;
+
+    .my_draggable {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 4px 4px 12px 2px;
+        height: 235px;
+        width: 200px;
+        background-color: white;
+        overflow: hidden;
     }
-    P {
-        margin: 0;
+    .my_draggable:not(:first-child){
+        margin-left: -4rem;
     }
+    .my_draggable:hover{
+        transform: translateY(-1rem);
+        transition: 0.5s ease-out;
+    }
+    .my_draggable:hover ~.my_draggable{
+        transform: translateX(3rem);
+    }
+
 }
 
 p.whot-letter {
@@ -147,6 +165,7 @@ h4 {
 }
 
 .roll {
+    z-index: 4;
     animation-name: rolling;
     animation-duration: 2s;
     animation-fill-mode: forwards;
@@ -163,4 +182,9 @@ h4 {
 
 #score-board {
     background-color: rgba(0, 0, 0, .2);
+    height: 100vh;
 }
+
+// #computer, #player, #center {
+//     border: 1px solid blue;
+// }

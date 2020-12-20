@@ -26,10 +26,17 @@ body {
   50% {
     color: white; } }
 #computer {
-  margin-bottom: 10px;
   display: flex; }
-  #computer div {
-    margin: 5px; }
+  #computer .ndraggable {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 12px 2px;
+    height: 235px;
+    width: 200px;
+    background-color: white;
+    overflow: hidden; }
+  #computer .ndraggable:not(:first-child) {
+    margin-left: -4rem; }
 
 span {
   color: wheat; }
@@ -42,7 +49,7 @@ span {
 
 #center {
   display: flex;
-  margin-top: 30px; }
+  margin-bottom: 30px; }
   #center p {
     margin: 0; }
   #center #droppable {
@@ -78,13 +85,22 @@ span {
           color: #521717; }
 
 #player {
-  display: flex;
-  position: fixed;
-  bottom: 0; }
-  #player div {
-    margin: 5px; }
-  #player P {
-    margin: 0; }
+  display: flex; }
+  #player .my_draggable {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 12px 2px;
+    height: 235px;
+    width: 200px;
+    background-color: white;
+    overflow: hidden; }
+  #player .my_draggable:not(:first-child) {
+    margin-left: -4rem; }
+  #player .my_draggable:hover {
+    transform: translateY(-1rem);
+    transition: 0.5s ease-out; }
+  #player .my_draggable:hover ~ .my_draggable {
+    transform: translateX(3rem); }
 
 p.whot-letter {
   text-align: center;
@@ -115,6 +131,7 @@ h4 {
   margin: 0; }
 
 .roll {
+  z-index: 4;
   animation-name: rolling;
   animation-duration: 2s;
   animation-fill-mode: forwards; }
@@ -128,6 +145,7 @@ h4 {
   padding: 0px 6px; }
 
 #score-board {
-  background-color: rgba(0, 0, 0, 0.2); }
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh; }
 
 /*# sourceMappingURL=styles.css.map */
