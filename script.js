@@ -1,4 +1,4 @@
-// $('#staticBackdrop').modal('show')
+$('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
     {
@@ -224,8 +224,7 @@ var computerCAS = []
 var playerCAS = 0
 // creaes a copy of the total deck of cards to replaced when playing again
 let myDeck = [...availableCard]
-// twoCount and fiveCount are set to false to show that a 2 or 5 card is not active
-// var twoCount = false
+// fiveCount is set to false to show that a 5 card is not active
 var fiveCount = false
 // Holds the required whot shape by the computer of player
 var whotShape;
@@ -233,8 +232,6 @@ var whotShape;
 let playerName;
 // card intended to be played by the computer
 var compCard;
-// storage for the game somg
-var backgroundSound;
 // holds the game song to be played
 var playerHasPlayed = false
 // an array of messages to be displayed
@@ -255,8 +252,8 @@ function pick (n) {
         availableCard = played
         played = []
     }
-        var r = Math.floor(Math.random() * availableCard.length)
-        render(r, n)
+        var randomCard  = Math.floor(Math.random() * availableCard.length)
+        render(randomCard, n)
 }
 
 
@@ -268,7 +265,7 @@ function render (re, z) {
         let cardNum = availableCard[re]['number']
         let cardShape = availableCard[re]['shape']
         var div;
-        var x;
+        var placer;
         var s = 'fas fa-square'
         var t = 'fas fa-play'
         var c = 'fas fa-circle'
@@ -292,7 +289,7 @@ function render (re, z) {
         }
 
         if (z == 0) {
-            x = '#computer'
+            placer = '#computer'
             computerCAS.push(availableCard[re])
             div = `<div class="ndraggable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%; overflow: hidden;">
                         <div style="height: 100%; width: 100%; margin: 0; background-color: #521717;" class="temp fas fa-whot">
@@ -316,7 +313,7 @@ function render (re, z) {
                         </div>
                     </div>`
         } else if (z == 1) {
-            x = '#player'
+            placer = '#player'
             playerCAS++
             div = `<div class="draggable my_draggable">
                 <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p>
@@ -331,7 +328,7 @@ function render (re, z) {
                 dashCards(1)
                 return
             }
-            x = '#middle'
+            placer = '#middle'
             div = `<div id="droppable" style="height: 235px; width: 200px; background-color: white; position: relative; border-radius: 3%;">
             <p style="color:#521717; font-weight: bolder; font-size: xx-large;" class="num">${cardNum}</p><span style="visibility: hidden;">${cardShape}</span><div style="position: absolute; top: 33px; left: 7px; " > <i class="${shapes}" style="font-size: 20px; color:#521717;"></i></div><div  style="position: absolute; top: 70px; left: 50px; " > <i class="${shapes}" style="font-size: 100px; color:#521717;  "></i></div><div style="position: absolute; bottom: 32px; right: 12px; " > <i class="${shapes}" style="font-size: 20px; color:#521717; "></i></div><h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">${cardNum}</h3></div>`
         }
@@ -368,7 +365,7 @@ function render (re, z) {
                         <h3 style="color:#521717; font-weight: bolder; font-size: xx-large; transform: rotateY(180deg) rotateX(180deg); position: absolute; bottom: 0px; right: 5px; margin: 0;">20</h3>
                     </div>`
         }
-        $(x).append(div)
+        $(placer).append(div)
 
         $('.draggable').draggable({
             revert: true
@@ -377,7 +374,7 @@ function render (re, z) {
         availableCard.splice(re, 1)
 
         // Allow click and play for players on mobile
-        if (x == '#player') {
+        if (placer == '#player') {
             let card = document.querySelectorAll('.draggable')
             card[card.length - 1].addEventListener('click', (e) => {
                 const draggedNum = card[card.length - 1].querySelectorAll('.num')[0].innerHTML
@@ -400,14 +397,13 @@ function render (re, z) {
         }
 
         if (playerCAS > 8) {
-            let spacer = playerCAS - 2
+            let spacer = playerCAS - 4
             player.style.width = 100 + (spacer * 7) + "%";
            scroller.style.overflowX = "scroll"
         }
         else {
             player.style.width = "100%"
-            // scroller.style.overflowX = "none"
-
+            scroller.style.overflowX = "hidden"
         }
     }
 }
@@ -446,7 +442,6 @@ $('#droppable').droppable(
 // controls the player actions with the card
 let playerTest = (draggedNum) => {
     if (draggedNum == 2) {
-        // playerHasPlayed = true
         currentPlayer = 0
         dashCards(2, 0)
         $('h2').text(mes[6] + 2 + ' cards')
@@ -463,7 +458,6 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 14) {
-        // twoCount = false
         fiveCount = false
         currentPlayer = 0
         aud('pick')
@@ -476,7 +470,6 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 8) {
-        // twoCount = false
         fiveCount = false
         currentPlayer = 0
         playerHasPlayed = false
@@ -486,11 +479,9 @@ let playerTest = (draggedNum) => {
         }
         passTurn()
     } else if (draggedNum == 20) {
-        // twoCount = false
         fiveCount = false
         twenty()
     } else {
-        // twoCount = false
         fiveCount = false
         playerHasPlayed = true
         playerCAS--
@@ -505,18 +496,9 @@ let playerTest = (draggedNum) => {
 // Returns true if card can be succesfully played
 // Retruns false if cards don't match
 function dropCheck (p, span) {
-    // var dropNum = $('#droppable').find('.num').text()
     var dropNum = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var dropSha = $('#droppable').find('span').text()
     console.log(dropNum)
-    // if (dropNum == 2 && twoCount == true) {
-    //     if (p == 2) {
-    //         twoCount = false
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // } else
         if (dropNum == 5 && fiveCount == true) {
         if (p == 5) {
             fiveCount = false
@@ -528,10 +510,6 @@ function dropCheck (p, span) {
         return true
     } else if (dropNum == 20) {
         if (p == 20 || span == whotShape) {
-            // if (p == 2) {
-            //     twoCount = true
-            //     return true
-            // } else
                 if (p == 5) {
                 fiveCount = true
                 return true
@@ -543,9 +521,6 @@ function dropCheck (p, span) {
             return false
         }
     } else if (p == dropNum || span == dropSha || p == 20) {
-        // if (p == 2) {
-        //     twoCount = true
-        // } else
         if (p == 5) {
             fiveCount = true
         }
@@ -557,11 +532,11 @@ function dropCheck (p, span) {
 }
 
 // Varies the sound for each card action
-function aud (x) {
+function aud (key) {
     var song = document.createElement('audio')
-    if (x == 'play') {
+    if (key == 'play') {
         song.setAttribute('src', 'sound/play.mp3')
-    } else if (x == 'error') {
+    } else if (key == 'error') {
         song.setAttribute('src', 'sound/myerror.mp3')
     } else if ('pick') {
         song.setAttribute('src', 'sound/pick.mp3')
@@ -589,13 +564,7 @@ $('.twentyShape').on('click', function () {
 //On click of the market card
 $('#market').on('click', function () {
     if (currentPlayer == 1) {
-        // if (document.querySelector("#droppable").querySelectorAll("p")[3].innerHTML == 2 && twoCount == true) {
-        //     aud('pick')
-        //     dashCards(2, 1)
-        //     twoCount = false
-        //     playerHasPlayed = true
-        //     passTurn()
-        // } else
+
             if (document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML == 5 && fiveCount == true) {
             aud('pick')
             dashCards(3, 1)
@@ -619,7 +588,7 @@ function passTurn (whot) {
         scroller.style.overflowX = "scroll"
     } else {
         player.style.width = "100%"
-        // scroller.style.overflowX = "none"
+        scroller.style.overflowX = "hidden"
     }
     if (currentPlayer == 1) {
         currentPlayer = 0
@@ -637,13 +606,11 @@ function control (whot) {
     if (playerCAS == 0) {
         $('#staticBackdrop').modal('show')
         winner.hidden = false
-        backgroundSound.pause()
         $('#winner').text("Player Won")
         Store.updateScore(playerName, playerName)
     } else if (computerCAS.length == 0) {
         $('#staticBackdrop').modal('show')
         $('#winner').text("Computer Won")
-        backgroundSound.pause()
         winner.hidden = false
         Store.updateScore(playerName)
     } else {
@@ -670,7 +637,7 @@ function comp () {
     var p = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var span = $('#droppable').find('span').text()
     console.log(p)
-    var x = false
+    var seenCard = false
 
     for (let i = 0; i < computerCAS.length; i++) {
         var presentNum = computerCAS[i]['number']
@@ -678,9 +645,9 @@ function comp () {
 
         // If any card has the same shape, same number, or it's 20, allow the play of such card
         if (p == presentNum || span == presentSha || presentNum == 20 || (p == 20 && presentSha == whotShape)) {
-            x = true
-            var y = dropCheck(presentNum, presentSha)
-            if (y == true) {
+            seenCard = true
+            var possiblePlay = dropCheck(presentNum, presentSha)
+            if (possiblePlay == true) {
                 let ndraggable = document.querySelectorAll(".ndraggable")
                 for (j = 0; j < ndraggable.length; j++) {
                     console.log(ndraggable[j].querySelectorAll('p'))
@@ -717,7 +684,6 @@ function comp () {
                                 if (presentNum == 20) {
                                     twe[0].remove()
                                 } else {
-                                    // compCard.css('display', 'none')
                                     compCard.style.display = 'none'
                                 }
 
@@ -739,7 +705,6 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 14) {
-                                    // twoCount = false
                                     fiveCount = false
                                     currentPlayer = 1
                                     aud('pick')
@@ -752,7 +717,6 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 8) {
-                                    // twoCount = false
                                     fiveCount = false
                                     currentPlayer = 1
                                     playerHasPlayed = false
@@ -762,7 +726,6 @@ function comp () {
                                     }
                                     passTurn()
                                 } else if (presentNum == 20) {
-                                    // twoCount = false
                                     fiveCount = false
                                     computerCAS.splice(i, 1)
                                     if (computerCAS.length == 1) {
@@ -770,7 +733,6 @@ function comp () {
                                     }
                                     compTwenty()
                                 } else {
-                                    // twoCount = false
                                     fiveCount = false
                                     playerHasPlayed = false
                                     computerCAS.splice(i, 1)
@@ -782,24 +744,10 @@ function comp () {
                             }, 1000)
                         }, 1000)
                         break
-                        // return false
                     }
                 }
                 break
             } else {
-                // If the computer can play this card but there is an active pic 2 or pick 3 card
-                // if (p == 2 && twoCount == true) {
-                //     setTimeout(function () {
-                //         aud('pick')
-                //         dashCards(2, currentPlayer)
-                //         $('h2').text(mes[6] + 2 + ' cards')
-                //         setTimeout(function () {
-                //             twoCount = false
-                //             playerHasPlayed = false
-                //             passTurn()
-                //         }, 1000)
-                //     }, 1000)
-                // } else
                     if (p == 5 && fiveCount == true) {
                     setTimeout(function () {
                         aud('pick')
@@ -828,18 +776,7 @@ function comp () {
     }
 
     // If computer has no card to play then it picks 1, 2 or 3 cards accordingly
-    if (!x) {
-        // if (p == 2 && twoCount == true) {
-        //     aud('pick')
-        //     dashCards(2, currentPlayer)
-        //     $('h2').text(mes[6] + 2 + ' cards')
-        //     setTimeout(function () {
-        //         twoCount = false
-        //         playerHasPlayed = false
-        //         passTurn()
-        //     }, 1000)
-
-        // } else
+    if (!seenCard) {
             if (p == 5 && fiveCount == true) {
             aud('pick')
             dashCards(3, currentPlayer)
@@ -1028,15 +965,11 @@ function nnow () {
     scoreSetter()
     Store.setBoardHistory()
     setListener()
-    backgroundSound = document.createElement('audio')
-    backgroundSound.src = 'sound/back.mp3'
-    // backgroundSound.play()
     playerHasPlayed = false
     played = []
     availableCard = [...myDeck]
     $('#computer').html('')
     $('#player').html('')
-    // twoCount = false
     fiveCount = false
     computerCAS = []
     playerCAS = 0
