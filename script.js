@@ -402,7 +402,7 @@ function render (re, z) {
            scroller.style.overflowX = "scroll"
         }
         else {
-            player.style.width = "100%"
+            document.querySelector("#player").style.width = "100%"
             scroller.style.overflowX = "hidden"
         }
     }
@@ -587,7 +587,7 @@ function passTurn (whot) {
     if (playerCAS > 8) {
         scroller.style.overflowX = "scroll"
     } else {
-        player.style.width = "100%"
+        document.querySelector("#player").style.width = "100%"
         scroller.style.overflowX = "hidden"
     }
     if (currentPlayer == 1) {
@@ -977,7 +977,6 @@ function nnow () {
     dashCards(5, 0)
     dashCards(5, 1)
     passTurn()
-    console.log(computerCAS)
 }
 nnow()
 
