@@ -230,6 +230,7 @@ var fiveCount = false
 var whotShape;
 // Holds the player's name
 let playerName;
+let backgroundSound;
 // card intended to be played by the computer
 var compCard;
 // holds the game song to be played
@@ -397,7 +398,7 @@ function render (re, z) {
         }
 
         if (playerCAS > 8) {
-            let spacer = playerCAS - 4
+            let spacer = playerCAS - 6
             player.style.width = 100 + (spacer * 7) + "%";
            scroller.style.overflowX = "scroll"
         }
@@ -418,7 +419,6 @@ $('#droppable').droppable(
             var draggedNum = $(ui.draggable).find('p.num').text()
             var draggedSha = $(ui.draggable).find('span').text()
             var checker = dropCheck(draggedNum, draggedSha)
-            console.log(draggedNum)
             if (playerHasPlayed) {
                 return
             }
@@ -498,7 +498,6 @@ let playerTest = (draggedNum) => {
 function dropCheck (p, span) {
     var dropNum = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var dropSha = $('#droppable').find('span').text()
-    console.log(dropNum)
         if (dropNum == 5 && fiveCount == true) {
         if (p == 5) {
             fiveCount = false
@@ -585,6 +584,8 @@ $('#market').on('click', function () {
 // controls turn pass
 function passTurn (whot) {
     if (playerCAS > 8) {
+        let spacer = playerCAS - 6
+        player.style.width = 100 + (spacer * 7) + "%";
         scroller.style.overflowX = "scroll"
     } else {
         document.querySelector("#player").style.width = "100%"
@@ -636,7 +637,6 @@ function comp () {
     // var p = $('#droppable').find('p').text()
     var p = document.querySelector("#droppable").querySelectorAll(".num")[0].innerHTML
     var span = $('#droppable').find('span').text()
-    console.log(p)
     var seenCard = false
 
     for (let i = 0; i < computerCAS.length; i++) {
@@ -650,7 +650,6 @@ function comp () {
             if (possiblePlay == true) {
                 let ndraggable = document.querySelectorAll(".ndraggable")
                 for (j = 0; j < ndraggable.length; j++) {
-                    console.log(ndraggable[j].querySelectorAll('p'))
                     if (ndraggable[j].querySelectorAll(".num")[0].innerHTML == presentNum && ndraggable[j].querySelector("span").innerHTML == presentSha) {
                         compCard = ndraggable[j]
 
@@ -658,7 +657,6 @@ function comp () {
                         document.querySelector(`#${presentSha + presentNum}`).parentElement.classList.add('roll')
                         setTimeout(() => {
                             document.querySelector(`#${presentSha + presentNum}`).previousElementSibling.style.display = 'none'
-                            console.log(document.querySelector(`#${presentSha + presentNum}`))
                             document.querySelector(`#${presentSha + presentNum}`).style.display = ''
                         }, 500)
 
@@ -815,7 +813,6 @@ function compTwenty () {
     setTimeout(function () {
         $('h2').text('computer requests ' + whotShape)
         playerHasPlayed = false
-        console.log(currentPlayer)
         passTurn('whot')
     }, 2000)
 }
@@ -961,7 +958,13 @@ function setListener() {
     })
 }
 function nnow () {
+    backgroundSound = undefined
     document.querySelector('tbody').innerHTML = ''
+    backgroundSound = document.createElement("audio")
+    backgroundSound.src = "sound/back.mp3"
+    backgroundSound.setAttribute("autoplay", true)
+    backgroundSound.setAttribute("loop", true)
+    backgroundSound.play()
     scoreSetter()
     Store.setBoardHistory()
     setListener()
@@ -978,6 +981,6 @@ function nnow () {
     dashCards(5, 1)
     passTurn()
 }
-nnow()
+// nnow()
 
 fillData()
