@@ -1,4 +1,4 @@
-$('#staticBackdrop').modal('show')
+// $('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
     {
@@ -244,8 +244,9 @@ function dashCards (number, player) {
         pick(player)
     }
 }
-// allocates a card to the center
-dashCards(1)
+// // allocates a card to the center
+// dashCards(1)
+
 
 // The pick function picks a random card from the availableCard array
 function pick (n) {
@@ -261,7 +262,7 @@ function pick (n) {
 // The render function takes in the index number of the random generated number and the currentPlayer and display cards for each player
 function render (re, z) {
     if (availableCard[re] == undefined) {
-        pick(n)
+        pick(z)
     } else {
         let cardNum = availableCard[re]['number']
         let cardShape = availableCard[re]['shape']
@@ -505,8 +506,6 @@ function dropCheck (p, span) {
         } else {
             return false
         }
-    } else if (dropNum == 8) {
-        return true
     } else if (dropNum == 20) {
         if (p == 20 || span == whotShape) {
                 if (p == 5) {
@@ -545,13 +544,16 @@ function aud (key) {
 
 // ON dropping a WHOT 20 card, the twenty panel is made visible for shape selection
 function twenty () {
-    $('#twenty').css('visibility', 'visible')
+    $('#twenty').css('display', '')
+    $('.top').css('display', 'none')
 }
 
 // Assigns the shape clicked by the player to whotShape
 $('.twentyShape').on('click', function () {
     whotShape = $(this).attr('id')
-    $('#twenty').css('visibility', 'hidden')
+    $('.top').css('display', '')
+    $('#twenty').css('display', 'none')
+    // $('#twenty').css('visibility', 'hidden')
     playerHasPlayed = true
     playerCAS--
     if (playerCAS == 1) {
@@ -957,14 +959,16 @@ function setListener() {
         })
     })
 }
+// allocates a card to the center
+// dashCards(1)
 function nnow () {
     backgroundSound = undefined
     document.querySelector('tbody').innerHTML = ''
     backgroundSound = document.createElement("audio")
     backgroundSound.src = "sound/back.mp3"
-    backgroundSound.setAttribute("autoplay", true)
+    // backgroundSound.setAttribute("autoplay", true)
     backgroundSound.setAttribute("loop", true)
-    backgroundSound.play()
+    // backgroundSound.play()
     scoreSetter()
     Store.setBoardHistory()
     setListener()
@@ -979,8 +983,9 @@ function nnow () {
     currentPlayer = 0
     dashCards(5, 0)
     dashCards(5, 1)
+    dashCards(1)
     passTurn()
 }
-// nnow()
+nnow()
 
 fillData()

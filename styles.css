@@ -49,7 +49,11 @@ span {
 
 #center {
   display: flex;
-  margin-bottom: 30px; }
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
+  #center div {
+    margin-right: 10%; }
   #center p {
     margin: 0; }
   #center #droppable {
@@ -66,10 +70,9 @@ span {
     height: 235px;
     width: 200px;
     background-color: wheat;
-    visibility: hidden;
-    margin: 0 70px;
     display: flex;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    margin-left: 0; }
     #center #twenty #circle, #center #twenty #star, #center #twenty #square, #center #twenty #cross, #center #twenty #triangle {
       height: 45px;
       width: 60px;
@@ -85,7 +88,9 @@ span {
           color: #521717; }
 
 #player {
-  display: flex; }
+  display: flex;
+  position: absolute;
+  bottom: 0; }
   #player .my_draggable {
     background: white;
     border-radius: 1rem;
@@ -147,5 +152,16 @@ h4 {
 #score-board {
   background-color: rgba(0, 0, 0, 0.2);
   height: 100vh; }
+
+#scroller {
+  height: 100vh; }
+
+#message_option {
+  height: 235px;
+  width: 200px; }
+
+#computer, #center {
+  position: sticky;
+  left: 0; }
 
 /*# sourceMappingURL=styles.css.map */

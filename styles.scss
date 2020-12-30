@@ -58,7 +58,12 @@ span {
 
 #center {
     display: flex;
-    margin-bottom: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    div {
+        margin-right: 10%;
+    }
     p {
         margin: 0;
     }
@@ -81,10 +86,10 @@ span {
         height: 235px;
         width: 200px;
         background-color: wheat;
-        visibility: hidden;
-        margin: 0 70px;
+        // margin: 0 70px;
         display: flex;
         flex-wrap: wrap;
+        margin-left: 0;
         #circle, #star, #square, #cross, #triangle {
             height: 45px;
             width: 60px;
@@ -106,7 +111,8 @@ span {
 
 #player {
     display: flex;
-
+    position: absolute;
+    bottom: 0;
     .my_draggable {
         background: white;
         border-radius: 1rem;
@@ -188,3 +194,19 @@ h4 {
 // #computer, #player, #center {
 //     border: 1px solid blue;
 // }
+
+#scroller {
+    // border: 1px solid red;
+    height: 100vh;
+}
+
+#message_option {
+    // border: 1px yellow solid;
+    height: 235px;
+    width: 200px;
+}
+
+#computer, #center {
+    position: sticky;
+    left: 0;
+}
