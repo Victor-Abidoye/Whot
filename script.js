@@ -1,4 +1,4 @@
-// $('#staticBackdrop').modal('show')
+$('#staticBackdrop').modal('show')
 // available card contains the number of cards available in the deck of card at any specific time
 var availableCard = [
     {
@@ -244,8 +244,6 @@ function dashCards (number, player) {
         pick(player)
     }
 }
-// // allocates a card to the center
-// dashCards(1)
 
 
 // The pick function picks a random card from the availableCard array
@@ -553,7 +551,6 @@ $('.twentyShape').on('click', function () {
     whotShape = $(this).attr('id')
     $('.top').css('display', '')
     $('#twenty').css('display', 'none')
-    // $('#twenty').css('visibility', 'hidden')
     playerHasPlayed = true
     playerCAS--
     if (playerCAS == 1) {
@@ -973,8 +970,7 @@ function setListener() {
         })
     })
 }
-// allocates a card to the center
-// dashCards(1)
+
 function nnow () {
     backgroundSound.pause()
     document.querySelector("#songControl button i").classList.add("fa-pause-circle")
@@ -984,7 +980,6 @@ function nnow () {
     backgroundSound.src = "sound/back.mp3"
     backgroundSound.setAttribute("autoplay", true)
     backgroundSound.setAttribute("loop", true)
-    // backgroundSound.play()
     scoreSetter()
     Store.setBoardHistory()
     setListener()
@@ -1003,6 +998,6 @@ function nnow () {
     dashCards(1)
     passTurn()
 }
-nnow()
+// nnow()
 
 fillData()
