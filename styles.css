@@ -151,7 +151,8 @@ h4 {
 
 #score-board {
   background-color: rgba(0, 0, 0, 0.2);
-  height: 100vh; }
+  height: 100vh;
+  position: relative; }
 
 #scroller {
   height: 100vh; }
@@ -163,5 +164,14 @@ h4 {
 #computer, #center {
   position: sticky;
   left: 0; }
+
+#songControl {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  margin-left: -5px; }
+
+#songControl button i {
+  font-size: 30px; }
 
 /*# sourceMappingURL=styles.css.map */

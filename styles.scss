@@ -189,6 +189,7 @@ h4 {
 #score-board {
     background-color: rgba(0, 0, 0, .2);
     height: 100vh;
+    position: relative;
 }
 
 // #computer, #player, #center {
@@ -209,4 +210,16 @@ h4 {
 #computer, #center {
     position: sticky;
     left: 0;
+}
+
+#songControl {
+    // border: 1px solid blue;
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    margin-left: -5px;
+}
+
+#songControl button i {
+    font-size: 30px;
 }

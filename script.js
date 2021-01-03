@@ -230,7 +230,7 @@ var fiveCount = false
 var whotShape;
 // Holds the player's name
 let playerName;
-let backgroundSound;
+let backgroundSound = new Audio
 // card intended to be played by the computer
 var compCard;
 // holds the game song to be played
@@ -949,6 +949,20 @@ class Store {
     }
 }
 
+function musicControl() {
+    if (document.querySelector("#songControl button i").classList.contains("fa-pause-circle")) {
+        document.querySelector("#songControl button i").classList.remove("fa-pause-circle")
+        document.querySelector("#songControl button i").classList.add("fa-play-circle")
+        backgroundSound.pause()
+
+    } else {
+        backgroundSound.pause()
+        backgroundSound.play()
+        document.querySelector("#songControl button i").classList.add("fa-pause-circle")
+        document.querySelector("#songControl button i").classList.remove("fa-play-circle")
+    }
+}
+
 // Delete button to remove player's history from Table and localStorage
 function setListener() {
     const del = document.querySelectorAll('.del')
@@ -962,11 +976,13 @@ function setListener() {
 // allocates a card to the center
 // dashCards(1)
 function nnow () {
-    backgroundSound = undefined
+    backgroundSound.pause()
+    document.querySelector("#songControl button i").classList.add("fa-pause-circle")
+    document.querySelector("#songControl button i").classList.remove("fa-play-circle")
     document.querySelector('tbody').innerHTML = ''
     backgroundSound = document.createElement("audio")
     backgroundSound.src = "sound/back.mp3"
-    // backgroundSound.setAttribute("autoplay", true)
+    backgroundSound.setAttribute("autoplay", true)
     backgroundSound.setAttribute("loop", true)
     // backgroundSound.play()
     scoreSetter()
@@ -977,6 +993,7 @@ function nnow () {
     availableCard = [...myDeck]
     $('#computer').html('')
     $('#player').html('')
+    $('#middle').html('')
     fiveCount = false
     computerCAS = []
     playerCAS = 0
